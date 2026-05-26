@@ -11,8 +11,12 @@ export const site = {
   isoDate: "2026-07-25",
   startTime: "19:00",
   venueName: "Güzelcehisar Garden",
-  venueArea: "Bartın",
+  venueArea: "İstanbul",
+  venueAddress: "Otağtepe, Kavacık, Muhteşem Çk. No:25, 34810 Beykoz / İstanbul",
   mapUrl: "https://maps.app.goo.gl/Tncu7bZ7YdYZQe9KA",
+  // Verified address query for the map embed — resolves to Muhteşem Çıkmazı,
+  // Otağtepe, Kavacık (Beykoz, 34810), matching the shared pin's street.
+  mapQuery: "Güzelcehisar Garden, Otağtepe, Kavacık, 34810 Beykoz, İstanbul",
   // Paste the *embed* src of your published Google Form here.
   // (Google Forms → Send → < > → copy the src="..." URL.)
   // Leave empty to show a graceful "coming soon" placeholder + button.
@@ -56,7 +60,7 @@ type Dict = {
     schedule: { time: string; label: string }[];
   };
   gallery: { eyebrow: string; title: string; note: string };
-  rsvp: { eyebrow: string; title: string; body: string; cta: string; soon: string };
+  rsvp: { eyebrow: string; title: string; body: string; cta: string; soon: string; adultsOnly: string };
   info: { eyebrow: string; title: string; items: { title: string; body: string }[] };
   footer: { line: string; namesLine: string };
 };
@@ -81,7 +85,7 @@ export const dict: Record<Lang, Dict> = {
       eyebrow: "Evleniyoruz",
       sub: "Sizi, hayatımızın bu özel gününde aramızda görmekten mutluluk duyarız.",
       dateLine: "25 Temmuz 2026 · Cumartesi",
-      venueLine: "Güzelcehisar Garden · Bartın",
+      venueLine: "Güzelcehisar Garden · İstanbul",
       cta: "Katılımınızı bildirin",
     },
     story: {
@@ -97,7 +101,7 @@ export const dict: Record<Lang, Dict> = {
       timeLabel: "Saat",
       timeValue: "19:00 — düğün başlangıcı",
       placeLabel: "Mekân",
-      placeValue: "Güzelcehisar Garden, Bartın",
+      placeValue: "Güzelcehisar Garden, Kavacık · İstanbul",
       dressLabel: "Kıyafet",
       dressValue: "Şık davet kıyafeti",
       mapCta: "Haritada aç",
@@ -121,6 +125,8 @@ export const dict: Record<Lang, Dict> = {
       body: "Lütfen katılımınızı 1 Temmuz 2026 tarihine kadar bildirin. Aşağıdaki kısa formu doldurmanız yeterli.",
       cta: "Formu doldur",
       soon: "Katılım formu yakında burada olacak.",
+      adultsOnly:
+        "Çocuklarımızı çok sevsek de, kutlamamızı yetişkinlere özel olarak planladık. Anlayışınız için teşekkür ederiz.",
     },
     info: {
       eyebrow: "Pratik bilgiler",
@@ -128,7 +134,7 @@ export const dict: Record<Lang, Dict> = {
       items: [
         {
           title: "Ulaşım",
-          body: "Güzelcehisar Garden, Bartın. Mekânda otopark mevcuttur. Konum için haritayı kullanabilirsiniz.",
+          body: "Güzelcehisar Garden, Otağtepe, Kavacık (Beykoz / İstanbul). Mekânda otopark mevcuttur. Konum için haritayı kullanabilirsiniz.",
         },
         {
           title: "Konaklama",
@@ -165,7 +171,7 @@ export const dict: Record<Lang, Dict> = {
       eyebrow: "Мы женимся",
       sub: "Будем счастливы видеть вас рядом в этот особенный день нашей жизни.",
       dateLine: "25 июля 2026 · суббота",
-      venueLine: "Güzelcehisar Garden · Бартын",
+      venueLine: "Güzelcehisar Garden · Стамбул",
       cta: "Подтвердить участие",
     },
     story: {
@@ -181,7 +187,7 @@ export const dict: Record<Lang, Dict> = {
       timeLabel: "Время",
       timeValue: "19:00 — начало торжества",
       placeLabel: "Место",
-      placeValue: "Güzelcehisar Garden, Бартын",
+      placeValue: "Güzelcehisar Garden, Kavacık · Стамбул",
       dressLabel: "Дресс-код",
       dressValue: "Нарядная одежда",
       mapCta: "Открыть на карте",
@@ -205,6 +211,8 @@ export const dict: Record<Lang, Dict> = {
       body: "Пожалуйста, подтвердите участие до 1 июля 2026 года. Достаточно заполнить короткую форму ниже.",
       cta: "Заполнить форму",
       soon: "Форма для подтверждения скоро появится здесь.",
+      adultsOnly:
+        "Как бы мы ни любили детей, мы планируем наше торжество как праздник для взрослых. Спасибо за понимание.",
     },
     info: {
       eyebrow: "Полезное",
@@ -212,7 +220,7 @@ export const dict: Record<Lang, Dict> = {
       items: [
         {
           title: "Как добраться",
-          body: "Güzelcehisar Garden, Бартын. На территории есть парковка. Для маршрута воспользуйтесь картой.",
+          body: "Güzelcehisar Garden, Otağtepe, Kavacık (Бейкоз / Стамбул). На территории есть парковка. Для маршрута воспользуйтесь картой.",
         },
         {
           title: "Проживание",

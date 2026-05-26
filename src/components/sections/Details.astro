@@ -16,8 +16,8 @@ const facts = [
 ];
 
 const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(
-  `${site.venueName} ${site.venueArea}`,
-)}&output=embed`;
+  site.mapQuery,
+)}&z=16&output=embed`;
 ---
 
 <section id="details" class="relative overflow-hidden bg-teal-deep px-5 py-24 text-cream sm:py-32">
