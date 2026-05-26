@@ -1,0 +1,52 @@
+---
+/**
+ * A layered garden-rose / peony bloom drawn from overlapping petals.
+ * Renders an SVG <g>, so it must be placed inside an <svg>.
+ * Colours are passed in so one component covers blush / cream / blue blooms.
+ */
+interface Props {
+  x: number;
+  y: number;
+  s?: number;
+  rot?: number;
+  p1: string; // outer petals
+  p2: string; // inner petals + outline
+  c: string; // center
+}
+const { x, y, s = 1, rot = 0, p1, p2, c } = Astro.props;
+
+const outer = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+const mid = [18, 54, 90, 126, 162, 198, 234, 270, 306, 342];
+const inner = [0, 51, 102, 153, 204, 255, 306];
+// broad, rounded petal — overlaps into a full peony/garden-rose head
+const petal = "M0 0 C -13 -9 -14 -25 0 -30 C 14 -25 13 -9 0 0 Z";
+const stamen = [0, 60, 120, 180, 240, 300];
+---
+
+<g transform={`translate(${x} ${y}) rotate(${rot}) scale(${s})`}>
+  {
+    outer.map((a) => (
+      <path
+        d={petal}
+        fill={p1}
+        fill-opacity="0.95"
+        stroke={p2}
+        stroke-width="0.5"
+        stroke-opacity="0.45"
+        transform={`rotate(${a})`}
+      />
+    ))
+  }
+  {
+    mid.map((a) => (
+      <path d={petal} fill={p2} fill-opacity="0.85" transform={`rotate(${a}) scale(0.72)`} />
+    ))
+  }
+  {
+    inner.map((a) => (
+      <path d={petal} fill={p1} fill-opacity="0.95" transform={`rotate(${a}) scale(0.42)`} />
+    ))
+  }
+  <circle r="4.5" fill={c} />
+  {stamen.map((a) => <circle cx="0" cy="-3" r="1" fill="#fff8ee" fill-opacity="0.85" transform={`rotate(${a})`} />)}
+</g>

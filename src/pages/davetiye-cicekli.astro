@@ -1,5 +1,6 @@
 ---
 import { site } from "@/i18n/content";
+import Bloom from "@/components/motifs/Bloom.astro";
 
 const title = "Ulya & Ali · Düğün Davetiyesi";
 const description =
@@ -27,6 +28,19 @@ const branchLeaves: Leaf[] = [
   { x: 151, y: 210, r: 132, s: 0.7, t: "s" },
   { x: 150, y: 176, r: -48, s: 0.62, t: "s" },
   { x: 150, y: 150, r: 90, s: 0.5, t: "b" },
+  // extra foliage to nestle around the blooms (lusher)
+  { x: 178, y: 360, r: 34, s: 1.15, t: "s" },
+  { x: 124, y: 358, r: -34, s: 1.15, t: "s" },
+  { x: 186, y: 408, r: 72, s: 1.0, t: "d" },
+  { x: 118, y: 302, r: -70, s: 1.0, t: "g" },
+  { x: 190, y: 268, r: 52, s: 0.95, t: "s" },
+  { x: 110, y: 232, r: -62, s: 0.9, t: "s" },
+  { x: 170, y: 226, r: 42, s: 0.85, t: "b" },
+  { x: 150, y: 432, r: 160, s: 1.1, t: "s" },
+  { x: 204, y: 356, r: 82, s: 0.9, t: "s" },
+  { x: 128, y: 422, r: -82, s: 0.95, t: "g" },
+  { x: 198, y: 452, r: 100, s: 0.85, t: "d" },
+  { x: 116, y: 392, r: -92, s: 0.9, t: "s" },
 ];
 
 const toneVar: Record<Leaf["t"], string> = {
@@ -114,12 +128,15 @@ const toneVar: Record<Leaf["t"], string> = {
             }
           </g>
 
-          <!-- cotton puffs -->
-          <g transform="translate(96 408)">
-            <circle cx="0" cy="0" r="9" fill="#f3efe7" stroke="var(--beige-deep)" stroke-width="0.6" />
-            <circle cx="13" cy="6" r="8" fill="#f3efe7" stroke="var(--beige-deep)" stroke-width="0.6" />
-            <circle cx="5" cy="13" r="7.5" fill="#f3efe7" stroke="var(--beige-deep)" stroke-width="0.6" />
-          </g>
+          <!-- focal blooms -->
+          <Bloom x={164} y={372} s={2.0} rot={-8} p1="var(--blush)" p2="var(--rose)" c="var(--rose-deep)" />
+          <Bloom x={128} y={262} s={1.55} rot={14} p1="var(--cream)" p2="var(--cream-deep)" c="var(--rose)" />
+          <Bloom x={204} y={324} s={1.35} rot={-16} p1="var(--pblue)" p2="var(--pblue-deep)" c="var(--cream-deep)" />
+          <Bloom x={150} y={456} s={1.25} rot={8} p1="var(--cream)" p2="var(--cream-deep)" c="var(--rose)" />
+          <!-- little buds -->
+          <circle cx="190" cy="232" r="3.4" fill="var(--rose)" />
+          <circle cx="116" cy="206" r="3" fill="var(--blush)" />
+          <circle cx="206" cy="418" r="3" fill="var(--rose)" />
         </svg>
 
         <!-- small bottom-left sprig -->
@@ -146,6 +163,8 @@ const toneVar: Record<Leaf["t"], string> = {
               </g>
             ))
           }
+          <Bloom x={46} y={116} s={1.05} rot={-18} p1="var(--cream)" p2="var(--cream-deep)" c="var(--rose)" />
+          <Bloom x={92} y={150} s={0.78} rot={12} p1="var(--blush)" p2="var(--rose)" c="var(--rose-deep)" />
         </svg>
 
         <!-- content -->
@@ -217,6 +236,13 @@ const toneVar: Record<Leaf["t"], string> = {
       --beige: #cbb89c;
       --beige-deep: #b09c7c;
       --blue: #a9bcc1;
+      --blush: #ecc9c6;
+      --rose: #d79b98;
+      --rose-deep: #bf7d79;
+      --cream: #f1ddc6;
+      --cream-deep: #ddbd96;
+      --pblue: #bfced3;
+      --pblue-deep: #9fb4bc;
       --font-script: "Great Vibes", cursive;
       --font-serif: "Cormorant Garamond", "Times New Roman", serif;
     }
