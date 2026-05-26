@@ -1,0 +1,301 @@
+---
+import "@/styles/global.css";
+import { site } from "@/i18n/content";
+import Monogram from "@/components/motifs/Monogram.astro";
+import HornDivider from "@/components/motifs/HornDivider.astro";
+
+const title = "Ulya & Ali · Düğün Davetiyesi";
+const description = "25 Temmuz 2026 · Güzelcehisar Garden, İstanbul. Düğünümüze davetlisiniz.";
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="theme-color" content="#1c4a4f" />
+  </head>
+
+  <body class="davetiye-stage">
+    <main class="davetiye-wrap">
+      <article class="invite kilim-field">
+        <!-- decorative frame -->
+        <span class="frame" aria-hidden="true"></span>
+        <span class="corner corner--tl" aria-hidden="true"></span>
+        <span class="corner corner--tr" aria-hidden="true"></span>
+        <span class="corner corner--bl" aria-hidden="true"></span>
+        <span class="corner corner--br" aria-hidden="true"></span>
+
+        <div class="invite__inner">
+          <p class="reveal eyebrow" style="animation-delay:0.05s">Evleniyoruz</p>
+
+          <Monogram class="reveal invite__mono" />
+
+          <p class="reveal invite__couplet" style="animation-delay:0.2s">
+            “Bir ömrü birlikte yazmak dileğiyle…”
+          </p>
+
+          <h1 class="reveal invite__names" style="animation-delay:0.3s">
+            <span>Ulya</span>
+            <span class="invite__amp">&amp;</span>
+            <span>Ali</span>
+          </h1>
+
+          <HornDivider class="reveal invite__divider" style="animation-delay:0.42s" />
+
+          <p class="reveal invite__body" style="animation-delay:0.5s">
+            Hayatımızı birleştirip yeni bir yuva kurmanın mutluluğunu yaşıyoruz.
+            En değerli günümüzde sevincimize ortak olmanızdan ve bizi yalnız
+            bırakmamanızdan büyük onur duyarız.
+          </p>
+
+          <dl class="reveal invite__details" style="animation-delay:0.6s">
+            <div>
+              <dt>Tarih</dt>
+              <dd>25 Temmuz 2026 · Cumartesi</dd>
+            </div>
+            <div>
+              <dt>Saat</dt>
+              <dd>19.00</dd>
+            </div>
+            <div>
+              <dt>Yer</dt>
+              <dd>
+                {site.venueName}<br />
+                <span class="invite__addr">Otağtepe, Kavacık · Beykoz / İstanbul</span>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="reveal invite__foot" style="animation-delay:0.72s">
+            <span class="invite__rule"></span>
+            <p class="invite__lcv">
+              L.C.V. ve detaylar için: <a href="https://ulya.alisrc.com">ulya.alisrc.com</a>
+            </p>
+            <p class="invite__note">Düğünümüz yetişkinlere özeldir.</p>
+          </div>
+        </div>
+      </article>
+
+      <p class="davetiye-hint">Yazdırmak veya PDF olarak kaydetmek için Ctrl/Cmd + P</p>
+    </main>
+  </body>
+</html>
+
+<style>
+  .davetiye-stage {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--color-teal-deep);
+    background-image: radial-gradient(
+      70% 60% at 50% 30%,
+      rgba(28, 74, 79, 0.9),
+      var(--color-teal-deep) 75%
+    );
+    display: grid;
+    place-items: center;
+    padding: clamp(1rem, 4vw, 3rem) 1rem;
+  }
+
+  .davetiye-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+  }
+
+  /* Card sized to A4 portrait proportions. */
+  .invite {
+    position: relative;
+    width: min(94vw, 540px);
+    min-height: min(150vh, 770px);
+    display: flex;
+    border-radius: 3px;
+    background-color: var(--color-paper);
+    box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+  }
+
+  .frame {
+    position: absolute;
+    inset: clamp(0.7rem, 2.4vw, 1.1rem);
+    border: 1px solid color-mix(in srgb, var(--color-gold) 50%, transparent);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  /* Corner diamonds on the frame. */
+  .corner {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: var(--color-gold);
+    transform: rotate(45deg);
+    opacity: 0.8;
+  }
+  .corner--tl { top: calc(clamp(0.7rem, 2.4vw, 1.1rem) - 4px); left: calc(clamp(0.7rem, 2.4vw, 1.1rem) - 4px); }
+  .corner--tr { top: calc(clamp(0.7rem, 2.4vw, 1.1rem) - 4px); right: calc(clamp(0.7rem, 2.4vw, 1.1rem) - 4px); }
+  .corner--bl { bottom: calc(clamp(0.7rem, 2.4vw, 1.1rem) - 4px); left: calc(clamp(0.7rem, 2.4vw, 1.1rem) - 4px); }
+  .corner--br { bottom: calc(clamp(0.7rem, 2.4vw, 1.1rem) - 4px); right: calc(clamp(0.7rem, 2.4vw, 1.1rem) - 4px); }
+
+  .invite__inner {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: clamp(2rem, 7%, 3.4rem) clamp(1.6rem, 9%, 3rem);
+    gap: clamp(0.5rem, 1.6vh, 0.9rem);
+  }
+
+  .invite__mono {
+    width: clamp(72px, 16vh, 104px);
+    height: clamp(72px, 16vh, 104px);
+    margin-block: 0.2rem 0.1rem;
+  }
+
+  .invite__couplet {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--color-gold);
+    font-size: clamp(0.85rem, 1.9vh, 1.05rem);
+    letter-spacing: 0.01em;
+  }
+
+  .invite__names {
+    font-family: var(--font-display);
+    color: var(--color-teal-deep);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: clamp(2.4rem, 7.6vh, 4rem);
+    font-weight: 500;
+  }
+  .invite__amp {
+    color: var(--color-gold);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.66em;
+  }
+
+  .invite__divider {
+    width: clamp(150px, 42%, 210px);
+    height: 1.4rem;
+    color: color-mix(in srgb, var(--color-gold) 75%, transparent);
+  }
+
+  .invite__body {
+    font-family: var(--font-body);
+    color: var(--color-ink-soft);
+    max-width: 40ch;
+    font-size: clamp(0.82rem, 1.95vh, 1rem);
+    line-height: 1.7;
+    text-wrap: balance;
+  }
+
+  .invite__details {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.45rem, 1.4vh, 0.8rem);
+    margin-block: 0.3rem;
+  }
+  .invite__details dt {
+    font-family: var(--font-body);
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.64rem;
+    color: var(--color-gold);
+  }
+  .invite__details dd {
+    margin: 0.15rem 0 0;
+    font-family: var(--font-display);
+    color: var(--color-teal);
+    font-size: clamp(0.98rem, 2.3vh, 1.25rem);
+    line-height: 1.25;
+  }
+  .invite__addr {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+    letter-spacing: 0.02em;
+  }
+
+  .invite__foot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.3rem;
+  }
+  .invite__rule {
+    width: 44px;
+    height: 1px;
+    background: color-mix(in srgb, var(--color-gold) 55%, transparent);
+  }
+  .invite__lcv {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+  }
+  .invite__lcv a {
+    color: var(--color-teal);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-gold) 60%, transparent);
+  }
+  .invite__note {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.72rem;
+    color: color-mix(in srgb, var(--color-ink-soft) 80%, transparent);
+  }
+
+  .davetiye-hint {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: color-mix(in srgb, var(--color-gold-soft) 85%, transparent);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Print: the card becomes the page ───────────────────────── */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  @media print {
+    .davetiye-stage {
+      background: #fff;
+      padding: 0;
+      display: block;
+    }
+    .davetiye-hint {
+      display: none;
+    }
+    .invite {
+      width: 100%;
+      height: 100vh;
+      aspect-ratio: auto;
+      box-shadow: none;
+      border-radius: 0;
+    }
+    :global(html),
+    :global(body) {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
