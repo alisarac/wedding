@@ -52,20 +52,18 @@ const description =
             mutluluk duyarız.
           </p>
 
+          <!-- children note, above the date -->
+          <p class="note reveal" style="animation-delay:0.6s">
+            Minik misafirlerimiz, sizleri çok sevsek de bu akşam tatlı
+            rüyalarda olmanızı diliyoruz. İyi geceler.
+          </p>
+
           <!-- details -->
-          <div class="meta reveal" style="animation-delay:0.6s">
+          <div class="meta reveal" style="animation-delay:0.68s">
             <p class="meta__date">25 Temmuz 2026</p>
             <p class="meta__sub">Cumartesi &nbsp;·&nbsp; 19.00</p>
             <p class="meta__venue">{site.venueName}</p>
             <p class="meta__addr">Otağtepe, Kavacık &nbsp;·&nbsp; Beykoz / İstanbul</p>
-          </div>
-
-          <!-- footer -->
-          <div class="foot reveal" style="animation-delay:0.72s">
-            <p class="foot__note">
-              Minik misafirlerimiz, sizleri çok sevsek de bu akşam tatlı
-              rüyalarda olmanızı diliyoruz. İyi geceler.
-            </p>
           </div>
         </div>
       </article>
@@ -118,7 +116,8 @@ const description =
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      gap: clamp(1rem, 3vh, 1.9rem);
       text-align: center;
       padding: clamp(3rem, 11%, 4.6rem) clamp(2rem, 9%, 3.4rem);
     }
@@ -211,8 +210,7 @@ const description =
       margin: 0.22rem 0 0;
     }
 
-    .foot { display: flex; flex-direction: column; align-items: center; gap: 0.65rem; }
-    .foot__note {
+    .note {
       font-family: var(--serif);
       font-style: italic;
       font-size: 0.84rem;
