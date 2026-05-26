@@ -1,0 +1,419 @@
+---
+import { site } from "@/i18n/content";
+
+const title = "Ulya & Ali · Düğün Davetiyesi";
+const description =
+  "25 Temmuz 2026 · Güzelcehisar Garden, İstanbul. Düğünümüze davetlisiniz.";
+
+// Eucalyptus leaf positions for a branch (x, y, rotation°, scale, tone).
+// tone: s=sage, g=gold, b=beige, d=dusty blue
+type Leaf = { x: number; y: number; r: number; s: number; t: "s" | "g" | "b" | "d" };
+const branchLeaves: Leaf[] = [
+  { x: 150, y: 548, r: -42, s: 1.0, t: "s" },
+  { x: 150, y: 548, r: 138, s: 0.9, t: "d" },
+  { x: 146, y: 498, r: -52, s: 1.05, t: "g" },
+  { x: 150, y: 486, r: 128, s: 0.95, t: "s" },
+  { x: 140, y: 448, r: -40, s: 1.0, t: "s" },
+  { x: 150, y: 438, r: 150, s: 0.9, t: "b" },
+  { x: 142, y: 398, r: -58, s: 1.1, t: "d" },
+  { x: 152, y: 392, r: 132, s: 0.95, t: "s" },
+  { x: 146, y: 350, r: -44, s: 1.0, t: "g" },
+  { x: 150, y: 342, r: 142, s: 0.9, t: "s" },
+  { x: 148, y: 302, r: -54, s: 0.95, t: "s" },
+  { x: 152, y: 296, r: 128, s: 0.85, t: "b" },
+  { x: 150, y: 256, r: -46, s: 0.85, t: "d" },
+  { x: 152, y: 250, r: 140, s: 0.8, t: "s" },
+  { x: 150, y: 214, r: -50, s: 0.75, t: "g" },
+  { x: 151, y: 210, r: 132, s: 0.7, t: "s" },
+  { x: 150, y: 176, r: -48, s: 0.62, t: "s" },
+  { x: 150, y: 150, r: 90, s: 0.5, t: "b" },
+];
+
+const toneVar: Record<Leaf["t"], string> = {
+  s: "var(--sage)",
+  g: "var(--gold-soft)",
+  b: "var(--beige)",
+  d: "var(--blue)",
+};
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="theme-color" content="#e8edec" />
+  </head>
+
+  <body class="stage">
+    <main class="wrap">
+      <article class="invite">
+        <!-- watercolor washes -->
+        <span class="wash wash--1" aria-hidden="true"></span>
+        <span class="wash wash--2" aria-hidden="true"></span>
+        <span class="wash wash--3" aria-hidden="true"></span>
+
+        <!-- gold arch behind the right cluster -->
+        <svg class="arch" viewBox="0 0 200 600" fill="none" aria-hidden="true">
+          <circle cx="150" cy="300" r="168" stroke="var(--gold)" stroke-width="1.1" opacity="0.8" />
+        </svg>
+
+        <!-- right botanical cluster -->
+        <svg class="cluster cluster--right" viewBox="0 0 300 600" fill="none" aria-hidden="true">
+          <!-- main eucalyptus branch -->
+          <path
+            class="stem"
+            d="M150 560 C 132 480 168 430 150 350 C 134 286 166 232 150 150 C 144 120 150 96 150 70"
+            stroke="var(--sage-deep)"
+            stroke-width="1.4"
+            stroke-linecap="round"
+          />
+          {
+            branchLeaves.map((l) => (
+              <g transform={`translate(${l.x} ${l.y}) rotate(${l.r}) scale(${l.s})`}>
+                <path
+                  d="M0 0 C 9 -3 11 -15 0 -22 C -11 -15 -9 -3 0 0 Z"
+                  fill={toneVar[l.t]}
+                  fill-opacity="0.85"
+                  stroke="var(--sage-deep)"
+                  stroke-width="0.5"
+                  stroke-opacity="0.5"
+                />
+                <path d="M0 -1 L0 -19" stroke="var(--sage-deep)" stroke-width="0.4" stroke-opacity="0.45" />
+              </g>
+            ))
+          }
+
+          <!-- pampas plume -->
+          <g transform="translate(212 470)" stroke="var(--beige)" stroke-width="1" stroke-linecap="round" opacity="0.9">
+            <path d="M0 0 C -6 -60 -4 -120 0 -176" stroke="var(--beige-deep)" stroke-width="1.2" />
+            {
+              Array.from({ length: 22 }).map((_, i) => {
+                const t = i / 21;
+                const y = -8 - t * 168;
+                const len = 16 + (1 - t) * 14;
+                const dir = i % 2 === 0 ? 1 : -1;
+                return (
+                  <path
+                    d={`M0 ${y} q ${dir * len * 0.6} ${-len * 0.5} ${dir * len} ${-len * 0.9}`}
+                    stroke-opacity={0.55 + 0.3 * (1 - t)}
+                  />
+                );
+              })
+            }
+          </g>
+
+          <!-- cotton puffs -->
+          <g transform="translate(96 408)">
+            <circle cx="0" cy="0" r="9" fill="#f3efe7" stroke="var(--beige-deep)" stroke-width="0.6" />
+            <circle cx="13" cy="6" r="8" fill="#f3efe7" stroke="var(--beige-deep)" stroke-width="0.6" />
+            <circle cx="5" cy="13" r="7.5" fill="#f3efe7" stroke="var(--beige-deep)" stroke-width="0.6" />
+          </g>
+        </svg>
+
+        <!-- small bottom-left sprig -->
+        <svg class="cluster cluster--bl" viewBox="0 0 160 200" fill="none" aria-hidden="true">
+          <path d="M150 190 C 110 170 70 150 24 120 C 12 112 8 104 6 92" stroke="var(--sage-deep)" stroke-width="1.2" stroke-linecap="round" />
+          {
+            [
+              { x: 120, y: 176, r: 56, s: 0.9, t: "s" },
+              { x: 96, y: 162, r: 40, s: 0.95, t: "g" },
+              { x: 72, y: 150, r: 64, s: 0.9, t: "d" },
+              { x: 50, y: 138, r: 48, s: 0.85, t: "s" },
+              { x: 30, y: 124, r: 70, s: 0.8, t: "b" },
+              { x: 14, y: 104, r: 30, s: 0.7, t: "s" },
+            ].map((l) => (
+              <g transform={`translate(${l.x} ${l.y}) rotate(${l.r}) scale(${l.s})`}>
+                <path
+                  d="M0 0 C 9 -3 11 -15 0 -22 C -11 -15 -9 -3 0 0 Z"
+                  fill={toneVar[l.t as Leaf["t"]]}
+                  fill-opacity="0.85"
+                  stroke="var(--sage-deep)"
+                  stroke-width="0.5"
+                  stroke-opacity="0.5"
+                />
+              </g>
+            ))
+          }
+        </svg>
+
+        <!-- content -->
+        <div class="inner">
+          <!-- birds -->
+          <svg class="birds reveal" viewBox="0 0 120 40" fill="none" stroke="var(--ink)" stroke-width="1.3" stroke-linecap="round" aria-hidden="true" style="animation-delay:0.05s">
+            <path d="M8 22 Q16 12 24 20 Q32 12 40 22" opacity="0.85" />
+            <path d="M52 12 Q58 5 64 11 Q70 5 76 12" opacity="0.7" transform="scale(0.8) translate(20 0)" />
+            <path d="M84 26 Q90 19 96 25 Q102 19 108 26" opacity="0.6" transform="scale(0.7) translate(34 6)" />
+          </svg>
+
+          <h1 class="names reveal" style="animation-delay:0.18s">
+            <span class="names__a">Ulya</span>
+            <span class="names__amp">&amp;</span>
+            <span class="names__b">Ali</span>
+          </h1>
+
+          <p class="body reveal" style="animation-delay:0.32s">
+            En özel günümüz olan düğün törenimizde, siz değerli dostlarımızı ve
+            sevdiklerimizi aramızda görmekten mutluluk ve onur duyarız.
+          </p>
+
+          <div class="datebar reveal" style="animation-delay:0.44s">
+            <span class="datebar__side">Cumartesi</span>
+            <span class="datebar__rule"></span>
+            <span class="datebar__center">
+              <em class="datebar__month">Temmuz</em>
+              <strong class="datebar__day">25</strong>
+              <em class="datebar__year">2026</em>
+            </span>
+            <span class="datebar__rule"></span>
+            <span class="datebar__side">19.00</span>
+          </div>
+
+          <div class="venue reveal" style="animation-delay:0.56s">
+            <p class="venue__name">{site.venueName}</p>
+            <p class="venue__addr">Otağtepe, Kavacık · Beykoz / İstanbul</p>
+          </div>
+
+          <p class="script-line reveal" style="animation-delay:0.66s">Davetlisiniz</p>
+
+          <div class="foot reveal" style="animation-delay:0.74s">
+            <span class="foot__rule"></span>
+            <p class="foot__lcv">
+              L.C.V. ve detaylar: <a href="https://ulya.alisrc.com">ulya.alisrc.com</a>
+            </p>
+            <p class="foot__note">
+              Minik misafirlerimiz, sizleri çok sevsek de bu akşam tatlı
+              rüyalarda olmanızı diliyoruz. İyi geceler!
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <p class="hint">Yazdırmak veya PDF olarak kaydetmek için Ctrl/Cmd + P</p>
+    </main>
+  </body>
+
+  <style>
+    :root {
+      --paper: #f4f6f4;
+      --bg: #e7eceb;
+      --ink: #34373a;
+      --ink-soft: #6c7176;
+      --gold: #b2944c;
+      --gold-soft: #cdb37a;
+      --sage: #9aa789;
+      --sage-deep: #6f7d64;
+      --beige: #cbb89c;
+      --beige-deep: #b09c7c;
+      --blue: #a9bcc1;
+      --font-script: "Great Vibes", cursive;
+      --font-serif: "Cormorant Garamond", "Times New Roman", serif;
+    }
+
+    .stage {
+      margin: 0;
+      min-height: 100dvh;
+      background:
+        radial-gradient(60% 50% at 50% 28%, #eef1f0, var(--bg) 80%);
+      display: grid;
+      place-items: center;
+      padding: clamp(1rem, 4vw, 3rem) 1rem;
+    }
+    .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.1rem;
+    }
+
+    .invite {
+      position: relative;
+      width: min(94vw, 540px);
+      min-height: min(150vh, 770px);
+      display: flex;
+      overflow: hidden;
+      border-radius: 3px;
+      background: var(--paper);
+      box-shadow: 0 30px 70px -32px rgba(50, 60, 64, 0.55);
+    }
+
+    /* watercolor washes */
+    .wash {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(46px);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .wash--1 { width: 60%; height: 40%; top: -8%; right: -12%; background: radial-gradient(circle, var(--blue), transparent 70%); }
+    .wash--2 { width: 55%; height: 38%; bottom: -6%; left: -14%; background: radial-gradient(circle, var(--sage), transparent 70%); opacity: 0.38; }
+    .wash--3 { width: 50%; height: 34%; bottom: 4%; right: -10%; background: radial-gradient(circle, var(--beige), transparent 70%); opacity: 0.34; }
+
+    .arch {
+      position: absolute;
+      right: -6%;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 86%;
+      width: auto;
+      pointer-events: none;
+    }
+
+    .cluster { position: absolute; pointer-events: none; }
+    .cluster--right {
+      right: -3%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46%;
+    }
+    .cluster--bl {
+      left: -1%;
+      bottom: 1%;
+      width: 20%;
+    }
+
+    .inner {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+      padding: clamp(2.4rem, 8%, 3.4rem) clamp(1.6rem, 7%, 2.4rem);
+      padding-right: 36%;
+      gap: clamp(0.55rem, 1.7vh, 1rem);
+    }
+
+    .birds { width: clamp(74px, 18vw, 104px); height: auto; margin-bottom: 0.2rem; }
+
+    .names {
+      font-family: var(--font-script);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 0.18em;
+      font-size: clamp(2.4rem, 8vh, 4rem);
+      margin: 0;
+    }
+    .names__amp { color: var(--gold); font-size: 0.78em; }
+
+    .body {
+      font-family: var(--font-serif);
+      color: var(--ink-soft);
+      max-width: 30ch;
+      font-size: clamp(0.95rem, 2.2vh, 1.14rem);
+      line-height: 1.6;
+      margin: 0.2rem 0;
+      text-wrap: pretty;
+    }
+
+    .datebar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: clamp(0.7rem, 2.4vw, 1.2rem);
+      margin: 0.3rem 0;
+      color: var(--ink);
+    }
+    .datebar__rule { width: 1px; height: 52px; background: color-mix(in srgb, var(--gold) 55%, transparent); }
+    .datebar__side {
+      font-family: var(--font-serif);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+    }
+    .datebar__center { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+    .datebar__month, .datebar__year {
+      font-family: var(--font-serif);
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 0.74rem;
+      color: var(--gold);
+    }
+    .datebar__day {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: clamp(2.4rem, 6.5vh, 3.4rem);
+      color: var(--ink);
+      margin: 0.06em 0;
+    }
+
+    .venue { margin: 0.2rem 0; }
+    .venue__name {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: clamp(1rem, 2.4vh, 1.22rem);
+      color: var(--ink);
+      margin: 0;
+    }
+    .venue__addr {
+      font-family: var(--font-serif);
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      margin: 0.25rem 0 0;
+    }
+
+    .script-line {
+      font-family: var(--font-script);
+      font-size: clamp(1.5rem, 4vh, 2rem);
+      color: var(--gold);
+      margin: 0.1rem 0;
+    }
+
+    .foot { display: flex; flex-direction: column; align-items: flex-start; gap: 0.35rem; margin-top: 0.2rem; }
+    .foot__rule { width: 42px; height: 1px; background: color-mix(in srgb, var(--gold) 55%, transparent); }
+    .foot__lcv { font-family: var(--font-serif); font-size: 0.9rem; color: var(--ink-soft); margin: 0; }
+    .foot__lcv a { color: var(--ink); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); }
+    .foot__note {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      max-width: 40ch;
+      color: var(--ink-soft);
+      margin: 0.1rem 0 0;
+    }
+
+    .hint {
+      font-family: var(--font-serif);
+      font-size: 0.88rem;
+      letter-spacing: 0.03em;
+      color: color-mix(in srgb, var(--ink-soft) 80%, transparent);
+    }
+
+    /* load-in reveal */
+    .reveal { opacity: 0; transform: translateY(14px); animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+    @page { size: A4 portrait; margin: 0; }
+    @media print {
+      .stage { background: #fff; padding: 0; display: block; }
+      .hint { display: none; }
+      .invite { width: 100%; height: 100vh; min-height: 0; box-shadow: none; border-radius: 0; }
+      :global(html), :global(body) { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { animation: none; opacity: 1; transform: none; }
+    }
+  </style>
+</html>
