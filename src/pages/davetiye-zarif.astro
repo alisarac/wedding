@@ -1,5 +1,8 @@
 ---
 import { site } from "@/i18n/content";
+import HornDivider from "@/components/motifs/HornDivider.astro";
+import CornerMotif from "@/components/motifs/CornerMotif.astro";
+import Suzani from "@/components/motifs/Suzani.astro";
 
 const title = "Ulya & Ali · Düğün Davetiyesi";
 const description =
@@ -29,10 +32,15 @@ const description =
     <main class="wrap">
       <article class="card">
         <span class="frame" aria-hidden="true"></span>
+        <span class="corner corner--tl" aria-hidden="true"><CornerMotif /></span>
+        <span class="corner corner--tr" aria-hidden="true"><CornerMotif /></span>
+        <span class="corner corner--br" aria-hidden="true"><CornerMotif /></span>
+        <span class="corner corner--bl" aria-hidden="true"><CornerMotif /></span>
 
         <div class="inner">
           <!-- top group -->
           <div class="top">
+            <span class="medallion reveal"><Suzani /></span>
             <p class="eyebrow reveal" style="animation-delay:0.14s">Evleniyoruz</p>
           </div>
 
@@ -43,13 +51,12 @@ const description =
             <span class="names__row">Ali</span>
           </h1>
 
-          <div class="rule reveal" style="animation-delay:0.4s">
-            <span></span><i></i><span></span>
+          <div class="divider reveal" style="animation-delay:0.4s">
+            <HornDivider class="divider__art" />
           </div>
 
           <p class="invite reveal" style="animation-delay:0.5s">
-            En özel günümüz olan düğün törenimizde, sizi de aramızda görmekten
-            mutluluk duyarız.
+            En özel günümüzde, sizi de aramızda görmekten mutluluk duyarız.
           </p>
 
           <!-- children note, above the date -->
@@ -79,6 +86,7 @@ const description =
       --ink-soft: #837a6d;
       --gold: #a8854c;
       --gold-soft: #c3a574;
+      --frame-inset: clamp(0.85rem, 2.6vw, 1.25rem);
       --display: "Playfair Display", Georgia, serif;
       --serif: "Cormorant Garamond", "Times New Roman", serif;
     }
@@ -105,10 +113,23 @@ const description =
 
     .frame {
       position: absolute;
-      inset: clamp(0.85rem, 2.6vw, 1.25rem);
+      inset: var(--frame-inset);
       border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
       pointer-events: none;
     }
+
+    .corner {
+      position: absolute;
+      width: clamp(26px, 6.4vw, 38px);
+      line-height: 0;
+      color: color-mix(in srgb, var(--gold) 88%, transparent);
+      pointer-events: none;
+    }
+    .corner :global(svg) { width: 100%; height: auto; display: block; }
+    .corner--tl { top: var(--frame-inset); left: var(--frame-inset); }
+    .corner--tr { top: var(--frame-inset); right: var(--frame-inset); transform: rotate(90deg); }
+    .corner--br { bottom: var(--frame-inset); right: var(--frame-inset); transform: rotate(180deg); }
+    .corner--bl { bottom: var(--frame-inset); left: var(--frame-inset); transform: rotate(270deg); }
 
     .inner {
       flex: 1;
@@ -117,12 +138,14 @@ const description =
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: clamp(1rem, 3vh, 1.9rem);
+      gap: 0.72rem;
       text-align: center;
-      padding: clamp(3rem, 11%, 4.6rem) clamp(2rem, 9%, 3.4rem);
+      padding: 2.1rem 2.7rem;
     }
 
-    .top { display: flex; flex-direction: column; align-items: center; }
+    .top { display: flex; flex-direction: column; align-items: center; gap: 0.55rem; }
+    .medallion { width: 44px; line-height: 0; color: var(--gold); }
+    .medallion :global(svg) { width: 100%; height: auto; display: block; }
 
     .eyebrow {
       font-family: var(--serif);
@@ -147,27 +170,26 @@ const description =
       gap: 0.04em;
       margin: 0;
     }
-    .names__row { font-size: clamp(3.4rem, 13vh, 5.6rem); letter-spacing: 0.005em; }
+    .names__row { font-size: 3.1rem; letter-spacing: 0.005em; }
     .names__amp {
       font-family: var(--serif);
       font-style: italic;
       font-weight: 400;
       color: var(--gold);
-      font-size: clamp(1.4rem, 4vh, 2.1rem);
+      font-size: 1.7rem;
       line-height: 1;
       margin: 0.04em 0;
     }
 
-    .rule { display: flex; align-items: center; justify-content: center; gap: 0.6rem; }
-    .rule span { width: clamp(34px, 9vw, 54px); height: 1px; background: color-mix(in srgb, var(--gold) 60%, transparent); }
-    .rule i { width: 4px; height: 4px; transform: rotate(45deg); background: var(--gold); display: block; }
+    .divider { display: flex; justify-content: center; color: var(--gold); }
+    .divider :global(svg) { width: clamp(150px, 42%, 215px); height: auto; }
 
     .invite {
       font-family: var(--serif);
       font-weight: 400;
       color: var(--ink-soft);
       max-width: 26ch;
-      font-size: clamp(1.02rem, 2.3vh, 1.22rem);
+      font-size: 1.12rem;
       line-height: 1.55;
       margin: 0;
       text-wrap: balance;
@@ -179,7 +201,7 @@ const description =
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      font-size: clamp(1.05rem, 2.5vh, 1.3rem);
+      font-size: 1.22rem;
       color: var(--ink);
       margin: 0;
     }

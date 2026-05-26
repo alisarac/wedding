@@ -1,0 +1,33 @@
+---
+/**
+ * Suzani-style folk rosette (Uzbek) — a rounded sun/flower medallion in
+ * fine line. Secular folk floral, not geometric arabesque. currentColor.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+const petals = [0, 45, 90, 135, 180, 225, 270, 315];
+const dots = [22, 67, 112, 157, 202, 247, 292, 337];
+---
+
+<svg
+  class={className}
+  viewBox="0 0 64 64"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="0.9"
+  aria-hidden="true"
+>
+  {
+    petals.map((a) => (
+      <path
+        d="M32 32 C 26.5 22 26.5 12 32 7 C 37.5 12 37.5 22 32 32 Z"
+        transform={`rotate(${a} 32 32)`}
+      />
+    ))
+  }
+  {dots.map((a) => <circle cx="32" cy="14.5" r="1" fill="currentColor" stroke="none" transform={`rotate(${a} 32 32)`} />)}
+  <circle cx="32" cy="32" r="6.4" />
+  <circle cx="32" cy="32" r="2.1" fill="currentColor" stroke="none" />
+</svg>
