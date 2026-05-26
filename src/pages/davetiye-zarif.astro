@@ -4,16 +4,6 @@ import { site } from "@/i18n/content";
 const title = "Ulya & Ali · Düğün Davetiyesi";
 const description =
   "25 Temmuz 2026 · Güzelcehisar Garden, İstanbul. Düğünümüze davetlisiniz.";
-
-// One delicate fine-line laurel sprig (the single botanical accent).
-// Small outlined leaves along two thin stems — restrained, not clip-art.
-const sprigLeaves = [
-  { x: 43, y: 38, r: -58 }, { x: 36, y: 32, r: -54 }, { x: 29, y: 25, r: -50 },
-  { x: 23, y: 18, r: -46 }, { x: 18, y: 12, r: -42 },
-  { x: 57, y: 38, r: 58 }, { x: 64, y: 32, r: 54 }, { x: 71, y: 25, r: 50 },
-  { x: 77, y: 18, r: 46 }, { x: 82, y: 12, r: 42 },
-  { x: 47, y: 9, r: -18 }, { x: 53, y: 9, r: 18 },
-];
 ---
 
 <!doctype html>
@@ -43,23 +33,6 @@ const sprigLeaves = [
         <div class="inner">
           <!-- top group -->
           <div class="top">
-            <svg class="sprig reveal" viewBox="0 0 100 52" fill="none" aria-hidden="true" style="animation-delay:0.05s">
-              <g stroke="var(--gold)" stroke-width="0.9" stroke-linecap="round">
-                <path d="M50 48 Q 33 38 17 12" />
-                <path d="M50 48 Q 67 38 83 12" />
-              </g>
-              {
-                sprigLeaves.map((l) => (
-                  <path
-                    d="M0 0 C 5 -2 7 -8 0 -11 C -7 -8 -5 -2 0 0 Z"
-                    fill="var(--gold-soft)"
-                    fill-opacity="0.55"
-                    stroke="none"
-                    transform={`translate(${l.x} ${l.y}) rotate(${l.r})`}
-                  />
-                ))
-              }
-            </svg>
             <p class="eyebrow reveal" style="animation-delay:0.14s">Evleniyoruz</p>
           </div>
 
@@ -93,7 +66,6 @@ const sprigLeaves = [
               Minik misafirlerimiz, sizleri çok sevsek de bu akşam tatlı
               rüyalarda olmanızı diliyoruz. İyi geceler.
             </p>
-            <p class="foot__lcv">L.C.V. &amp; detaylar · <a href="https://ulya.alisrc.com">ulya.alisrc.com</a></p>
           </div>
         </div>
       </article>
@@ -151,8 +123,7 @@ const sprigLeaves = [
       padding: clamp(3rem, 11%, 4.6rem) clamp(2rem, 9%, 3.4rem);
     }
 
-    .top { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
-    .sprig { width: clamp(58px, 13vw, 74px); height: auto; }
+    .top { display: flex; flex-direction: column; align-items: center; }
 
     .eyebrow {
       font-family: var(--serif);
@@ -250,15 +221,6 @@ const sprigLeaves = [
       color: var(--ink-soft);
       margin: 0;
     }
-    .foot__lcv {
-      font-family: var(--serif);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-size: 0.68rem;
-      color: var(--ink-soft);
-      margin: 0;
-    }
-    .foot__lcv a { color: var(--gold); text-decoration: none; }
 
     .hint { font-family: var(--serif); font-size: 0.88rem; letter-spacing: 0.04em; color: #9b9384; }
 
