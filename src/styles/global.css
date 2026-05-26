@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+/* ── Design tokens ───────────────────────────────────────────────
+   "Modern heirloom": elegant cream canvas + Central Asian textile
+   accents (teal / gold / pomegranate, drawn from ikat & suzani).   */
+@theme {
+  --color-cream: #f7f0e3;
+  --color-cream-deep: #efe5d2;
+  --color-paper: #fffdf8;
+  --color-ink: #2a2520;
+  --color-ink-soft: #6a5f53;
+
+  --color-teal: #1c4a4f;
+  --color-teal-deep: #123438;
+  --color-gold: #b7913f;
+  --color-gold-soft: #d8bc7e;
+  --color-pom: #9b2d26;
+
+  --font-display: "Playfair Display", "Times New Roman", serif;
+  --font-body: "Lora", Georgia, serif;
+
+  --shadow-soft: 0 18px 50px -28px rgba(18, 52, 56, 0.5);
+}
+
+/* ── Base ────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--color-gold-soft);
+    color: var(--color-teal-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+}
+
+/* ── Decorative utilities ─────────────────────────────────────────── */
+@layer utilities {
+  /* Faint kilim-diamond field used as a section/page texture. */
+  .kilim-field {
+    background-color: var(--color-cream);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%231c4a4f' stroke-opacity='0.06' stroke-width='1.4'%3E%3Cpath d='M30 4 56 30 30 56 4 30Z'/%3E%3Cpath d='M30 16 44 30 30 44 16 30Z'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 60px 60px;
+  }
+
+  /* Eyebrow label above section titles. */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-style: italic;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--color-gold);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Staggered load-in reveal. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes reveal-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scroll-triggered reveal (toggled via IntersectionObserver).
+     Only hidden when JS is available (html.js), so the site is fully
+     visible without JS and for crawlers/print. */
+  html.js .on-scroll {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html.js .on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .on-scroll {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}

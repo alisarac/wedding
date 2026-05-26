@@ -1,0 +1,85 @@
+---
+import { type Lang, getDict, otherLang } from "@/i18n/content";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getDict(lang);
+const other = otherLang(lang);
+
+const nav = [
+  { href: "#details", label: t.nav.details },
+  { href: "#story", label: t.nav.story },
+  { href: "#gallery", label: t.nav.gallery },
+  { href: "#info", label: t.nav.info },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-500"
+  data-header
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
+    <a
+      href={`/${lang}/`}
+      class="font-display text-lg tracking-wide text-teal-deep transition-colors"
+      data-brand
+    >
+      Ulya <span class="text-gold">&amp;</span> Ali
+    </a>
+
+    <nav class="hidden items-center gap-8 md:flex" data-nav aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="group relative text-sm tracking-wide text-ink-soft transition-colors hover:text-teal"
+          >
+            {item.label}
+            <span class="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a
+        href="#rsvp"
+        class="hidden rounded-full border border-teal/30 px-4 py-1.5 text-sm tracking-wide text-teal transition-colors hover:border-teal hover:bg-teal hover:text-cream sm:inline-block"
+      >
+        {t.nav.rsvp}
+      </a>
+      <a
+        href={`/${other}/`}
+        class="rounded-full border border-gold/40 px-3 py-1.5 text-xs font-medium tracking-widest text-gold transition-colors hover:bg-gold hover:text-cream"
+        aria-label={t.langSwitchTo}
+      >
+        {other.toUpperCase()}
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]");
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 40) {
+      header.classList.add(
+        "bg-cream/85",
+        "backdrop-blur",
+        "shadow-[0_1px_0_rgba(28,74,79,0.12)]",
+      );
+    } else {
+      header.classList.remove(
+        "bg-cream/85",
+        "backdrop-blur",
+        "shadow-[0_1px_0_rgba(28,74,79,0.12)]",
+      );
+    }
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+</script>

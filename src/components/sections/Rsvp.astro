@@ -1,0 +1,53 @@
+---
+import { type Lang, getDict, site } from "@/i18n/content";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Tunduk from "@/components/motifs/Tunduk.astro";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<section id="rsvp" class="kilim-field relative px-5 py-24 sm:py-32">
+  <div class="mx-auto max-w-2xl text-center">
+    <SectionHeading eyebrow={t.rsvp.eyebrow} title={t.rsvp.title} />
+
+    <p class="on-scroll mx-auto mt-7 max-w-lg text-lg leading-relaxed text-ink-soft text-balance">
+      {t.rsvp.body}
+    </p>
+
+    <div class="on-scroll mt-10" style="transition-delay:0.1s">
+      {
+        site.rsvpEmbedUrl ? (
+          <div class="overflow-hidden rounded-sm border border-gold/40 bg-paper shadow-soft">
+            <iframe
+              src={site.rsvpEmbedUrl}
+              title="RSVP"
+              class="h-[1100px] w-full"
+              loading="lazy"
+            >
+              …
+            </iframe>
+          </div>
+        ) : (
+          <div class="grid place-items-center gap-5 rounded-sm border border-dashed border-gold/50 bg-paper/70 px-6 py-14 shadow-soft">
+            <Tunduk class="h-20 w-20 text-teal/15" />
+            <p class="font-display text-xl text-teal-deep">{t.rsvp.soon}</p>
+            {site.rsvpFormUrl && (
+              <a
+                href={site.rsvpFormUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-2 inline-flex items-center gap-2 rounded-full bg-teal px-7 py-3 text-sm font-medium tracking-wide text-cream transition-all duration-300 hover:-translate-y-0.5 hover:bg-teal-deep"
+              >
+                {t.rsvp.cta}
+              </a>
+            )}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+---
+import Tunduk from "./Tunduk.astro";
+import { site } from "@/i18n/content";
+
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<div class={`relative inline-grid place-items-center ${className}`}>
+  <Tunduk class="col-start-1 row-start-1 h-full w-full text-gold" />
+  <div
+    class="col-start-1 row-start-1 flex items-center gap-[0.12em] font-display text-teal-deep"
+    style="font-size: clamp(1.5rem, 4vw, 2.6rem);"
+  >
+    <span>{site.monogram.left}</span>
+    <span class="text-gold/90 font-normal" style="font-size: 0.7em;">&amp;</span>
+    <span>{site.monogram.right}</span>
+  </div>
+</div>

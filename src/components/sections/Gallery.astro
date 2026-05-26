@@ -1,0 +1,49 @@
+---
+import { type Lang, getDict, site } from "@/i18n/content";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Tunduk from "@/components/motifs/Tunduk.astro";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<section id="gallery" class="px-5 py-24 sm:py-32">
+  <div class="mx-auto max-w-5xl">
+    <SectionHeading eyebrow={t.gallery.eyebrow} title={t.gallery.title} />
+
+    <div class="on-scroll mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
+      {
+        site.gallery.map((item, i) => (
+          <figure
+            class={`group relative overflow-hidden rounded-sm bg-cream-deep ring-1 ring-teal/10 ${
+              item.spanWide ? "md:col-span-2 aspect-[16/10]" : "aspect-[4/5]"
+            }`}
+          >
+            {item.src ? (
+              <img
+                src={item.src}
+                alt=""
+                loading="lazy"
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            ) : (
+              <div class="grid h-full w-full place-items-center">
+                <Tunduk class="h-16 w-16 text-teal/12" />
+                <span class="absolute bottom-3 left-0 right-0 text-center text-[0.65rem] tracking-[0.2em] text-teal/30 uppercase">
+                  {i + 1}
+                </span>
+              </div>
+            )}
+          </figure>
+        ))
+      }
+    </div>
+
+    <p class="on-scroll mt-8 text-center text-sm tracking-wide text-ink-soft italic">
+      {t.gallery.note}
+    </p>
+  </div>
+</section>

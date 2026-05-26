@@ -1,0 +1,26 @@
+---
+import HornDivider from "./motifs/HornDivider.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  align?: "center" | "left";
+  tone?: "ink" | "cream";
+}
+const { eyebrow, title, align = "center", tone = "ink" } = Astro.props;
+const isCenter = align === "center";
+---
+
+<div class={`on-scroll ${isCenter ? "text-center" : "text-left"}`}>
+  <p class="eyebrow">{eyebrow}</p>
+  <h2
+    class={`mt-3 text-4xl sm:text-5xl ${tone === "cream" ? "text-cream" : "text-teal-deep"}`}
+  >
+    {title}
+  </h2>
+  {
+    isCenter && (
+      <HornDivider class="mx-auto mt-5 h-5 w-44 text-gold/70" />
+    )
+  }
+</div>

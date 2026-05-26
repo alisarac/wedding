@@ -1,0 +1,39 @@
+---
+import { type Lang, getDict } from "@/i18n/content";
+import Tunduk from "@/components/motifs/Tunduk.astro";
+import HornDivider from "@/components/motifs/HornDivider.astro";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<section id="story" class="relative px-5 py-24 sm:py-32">
+  <div class="mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-2 md:gap-16">
+    <div class="on-scroll">
+      <p class="eyebrow">{t.story.eyebrow}</p>
+      <h2 class="mt-3 text-4xl text-teal-deep sm:text-5xl">{t.story.title}</h2>
+      <HornDivider class="mt-5 h-5 w-40 text-gold/70" />
+      <p class="mt-7 max-w-prose text-lg leading-relaxed text-ink-soft text-balance">
+        {t.story.body}
+      </p>
+    </div>
+
+    <div class="on-scroll" style="transition-delay:0.12s">
+      <!-- framed photo placeholder -->
+      <div class="relative mx-auto aspect-[4/5] w-full max-w-sm">
+        <div class="absolute inset-0 -rotate-2 rounded-sm border border-gold/40"></div>
+        <div
+          class="absolute inset-0 grid place-items-center overflow-hidden rounded-sm bg-cream-deep shadow-soft ring-1 ring-teal/10"
+        >
+          <Tunduk class="h-28 w-28 text-teal/15" />
+          <span class="absolute bottom-4 text-xs tracking-[0.25em] text-teal/30 uppercase">
+            {t.gallery.note}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

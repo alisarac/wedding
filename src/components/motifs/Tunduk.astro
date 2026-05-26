@@ -1,0 +1,55 @@
+---
+/**
+ * Tunduk — the crown of a Kyrgyz yurt (the "shanyrak/tunduk").
+ * A secular Turkic folk emblem: a beaded sun-ring around a woven
+ * domed lattice. Inherits `currentColor` for stroke, so tint via
+ * the parent's text color.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 100 100"
+  fill="none"
+  stroke="currentColor"
+  aria-hidden="true"
+  role="presentation"
+>
+  <defs>
+    <clipPath id="tunduk-dome">
+      <circle cx="50" cy="50" r="34" />
+    </clipPath>
+  </defs>
+
+  <!-- outer rim -->
+  <circle cx="50" cy="50" r="46.5" stroke-width="1" opacity="0.7" />
+  <!-- beaded sun-ring -->
+  <circle
+    cx="50"
+    cy="50"
+    r="43"
+    stroke-width="3.2"
+    stroke-dasharray="0.4 5.1"
+    stroke-linecap="round"
+  />
+  <!-- inner ring framing the dome -->
+  <circle cx="50" cy="50" r="36" stroke-width="1.4" />
+
+  <!-- woven tunduk lattice (uuk poles seen from below) -->
+  <g clip-path="url(#tunduk-dome)" stroke-width="1.5" opacity="0.92">
+    <path d="M34 12 Q29 50 34 88" />
+    <path d="M50 10 Q50 50 50 90" />
+    <path d="M66 12 Q71 50 66 88" />
+    <path d="M12 34 Q50 29 88 34" />
+    <path d="M10 50 Q50 50 90 50" />
+    <path d="M12 66 Q50 71 88 66" />
+  </g>
+
+  <!-- center boss -->
+  <circle cx="50" cy="50" r="4.4" stroke-width="1.5" fill="currentColor" fill-opacity="0.08" />
+  <circle cx="50" cy="50" r="1.5" fill="currentColor" stroke="none" />
+</svg>

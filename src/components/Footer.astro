@@ -1,0 +1,26 @@
+---
+import { type Lang, getDict } from "@/i18n/content";
+import HornDivider from "./motifs/HornDivider.astro";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<footer class="relative overflow-hidden bg-teal-deep text-cream">
+  <div class="mx-auto max-w-3xl px-6 py-16 text-center sm:py-20">
+    <HornDivider class="mx-auto mb-8 h-6 w-56 text-gold-soft/80" />
+    <p class="font-display text-2xl leading-snug text-balance sm:text-3xl">
+      {t.footer.line}
+    </p>
+    <p class="mt-6 text-sm tracking-[0.28em] text-gold-soft uppercase">
+      {t.footer.namesLine}
+    </p>
+  </div>
+  <div
+    class="kilim-field pointer-events-none absolute inset-0 -z-0 opacity-[0.07] mix-blend-screen"
+  >
+  </div>
+</footer>
