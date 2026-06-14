@@ -9,7 +9,10 @@ interface Props {
 }
 const { lang } = Astro.props;
 const t = getDict(lang);
-const canonical = new URL(`/${lang}/`, Astro.site ?? "https://ulya.alisrc.com");
+const base = import.meta.env.BASE_URL;
+const canonical = new URL(`${base}${lang}/`, Astro.site ?? "https://ulya.alisrc.com");
+const trUrl = new URL(`${base}tr/`, Astro.site ?? "https://ulya.alisrc.com").href;
+const ruUrl = new URL(`${base}ru/`, Astro.site ?? "https://ulya.alisrc.com").href;
 ---
 
 <!doctype html>
@@ -23,9 +26,9 @@ const canonical = new URL(`/${lang}/`, Astro.site ?? "https://ulya.alisrc.com");
     <title>{t.meta.title}</title>
     <meta name="description" content={t.meta.description} />
     <link rel="canonical" href={canonical.href} />
-    <link rel="alternate" hreflang="tr" href={new URL("/tr/", canonical).href} />
-    <link rel="alternate" hreflang="ru" href={new URL("/ru/", canonical).href} />
-    <link rel="alternate" hreflang="x-default" href={new URL("/tr/", canonical).href} />
+    <link rel="alternate" hreflang="tr" href={trUrl} />
+    <link rel="alternate" hreflang="ru" href={ruUrl} />
+    <link rel="alternate" hreflang="x-default" href={trUrl} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

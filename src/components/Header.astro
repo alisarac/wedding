@@ -7,6 +7,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = getDict(lang);
 const other = otherLang(lang);
+const base = import.meta.env.BASE_URL;
 
 const nav = [
   { href: "#details", label: t.nav.details },
@@ -23,7 +24,7 @@ const nav = [
 >
   <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
     <a
-      href={`/${lang}/`}
+      href={`${base}${lang}/`}
       class="font-display text-lg tracking-wide text-teal-deep transition-colors"
       data-brand
     >
@@ -52,7 +53,7 @@ const nav = [
         {t.nav.rsvp}
       </a>
       <a
-        href={`/${other}/`}
+        href={`${base}${other}/`}
         class="rounded-full border border-gold/40 px-3 py-1.5 text-xs font-medium tracking-widest text-gold transition-colors hover:bg-gold hover:text-cream"
         aria-label={t.langSwitchTo}
       >

@@ -1,0 +1,97 @@
+---
+const base = import.meta.env.BASE_URL; // ends with "/"
+const links = [
+  { href: `${base}tr/`, label: "Düğün Sitesi · TR", desc: "Türkçe ana sayfa" },
+  { href: `${base}ru/`, label: "Свадебный сайт · RU", desc: "Русская версия" },
+  { href: `${base}davetiye-anadolu/`, label: "Davetiye · Anadolu", desc: "Kilim bantlı, sıcak topraksı tasarım" },
+  { href: `${base}davetiye-zarif/`, label: "Davetiye · Zarif", desc: "Editöryel minimal, ince motiflerle" },
+  { href: `${base}davetiye-cicekli/`, label: "Davetiye · Çiçekli", desc: "Botanik / suluboya esinli" },
+  { href: `${base}davetiye/`, label: "Davetiye · Tunduk", desc: "Orta Asya tunduk medalyonu" },
+];
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ulya &amp; Ali · Önizleme</title>
+    <meta name="description" content="Ulya & Ali düğün sitesi ve davetiye varyantları" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Ulya &amp; Ali</p>
+        <h1>Önizleme</h1>
+        <p class="sub">Düğün sitesi ve davetiye varyantları</p>
+      </header>
+      <ul>
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href}>
+                <span class="t">{l.label}</span>
+                <span class="d">{l.desc}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+
+    <style>
+      :root {
+        --paper: #f7eccc;
+        --ink: #2a2722;
+        --ink-soft: #6b5a44;
+        --terra: #b5613b;
+        --gold: #b89163;
+      }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        display: grid;
+        place-items: center;
+        padding: 2rem 1rem;
+      }
+      main { max-width: 560px; width: 100%; }
+      header { text-align: center; margin-bottom: 2rem; }
+      .eyebrow {
+        font-style: italic;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        color: var(--terra);
+        margin: 0 0 0.4rem;
+      }
+      h1 { font-weight: 500; font-size: 3rem; margin: 0; letter-spacing: 0.02em; }
+      .sub { color: var(--ink-soft); margin: 0.5rem 0 0; }
+      ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+      li a {
+        display: block;
+        padding: 1rem 1.3rem;
+        background: #fff8e6;
+        border: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      }
+      li a:hover {
+        transform: translateY(-2px);
+        border-color: var(--terra);
+        box-shadow: 0 8px 22px -14px rgba(110, 70, 40, 0.5);
+      }
+      .t { display: block; font-weight: 500; font-size: 1.2rem; }
+      .d { display: block; font-size: 0.92rem; color: var(--ink-soft); font-style: italic; margin-top: 0.2rem; }
+    </style>
+  </body>
+</html>
