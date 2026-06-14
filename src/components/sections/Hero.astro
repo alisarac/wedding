@@ -12,7 +12,7 @@ const [first, second] = (lang === "tr" ? site.names.latin : site.names.cyrillic)
 const conj = lang === "tr" ? "ve" : "и";
 ---
 
-<section class="relative flex min-h-dvh items-center justify-center overflow-hidden bg-cream px-5">
+<section class="relative flex min-h-dvh items-center justify-center overflow-hidden bg-cream px-[20%] sm:px-[21%] lg:px-[22%]">
   <!-- vertical kilim bands flanking the hero -->
   <div class="band band--left pointer-events-none absolute inset-y-0 left-0 z-0">
     <KilimBand />
@@ -80,8 +80,8 @@ const conj = lang === "tr" ? "ve" : "и";
 </section>
 
 <style>
-  .band { width: 9%; line-height: 0; }
+  .band { width: 14%; line-height: 0; }
   .band > :global(svg) { width: 100%; height: 100%; display: block; }
-  @media (min-width: 640px) { .band { width: 11%; } }
-  @media (min-width: 1024px) { .band { width: 12%; } }
+  @media (min-width: 640px) { .band { width: 15%; } }
+  @media (min-width: 1024px) { .band { width: 17%; } }
 </style>

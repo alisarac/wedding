@@ -19,16 +19,16 @@ const nav = [
 
 <header
   id="site-header"
-  class="fixed inset-x-0 top-0 z-50 transition-all duration-500"
+  class="fixed inset-x-0 top-0 z-50 bg-cream/90 backdrop-blur-md shadow-[0_1px_0_rgba(74,40,20,0.15)] transition-all duration-500"
   data-header
 >
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 sm:px-10">
     <a
       href={`${base}${lang}/`}
-      class="font-display text-lg tracking-wide text-teal-deep transition-colors"
+      class="font-display text-xl tracking-wide text-teal-deep transition-colors"
       data-brand
     >
-      Ulya <span class="text-gold">&amp;</span> Ali
+      Ulya <span class="script text-2xl text-teal">ve</span> Ali
     </a>
 
     <nav class="hidden items-center gap-8 md:flex" data-nav aria-label="Primary">
@@ -36,10 +36,10 @@ const nav = [
         nav.map((item) => (
           <a
             href={item.href}
-            class="group relative text-sm tracking-wide text-ink-soft transition-colors hover:text-teal"
+            class="group relative text-sm font-medium tracking-[0.18em] uppercase text-ink-soft transition-colors hover:text-teal"
           >
             {item.label}
-            <span class="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
+            <span class="absolute -bottom-1 left-0 h-px w-0 bg-teal transition-all duration-300 group-hover:w-full" />
           </a>
         ))
       }
@@ -48,19 +48,27 @@ const nav = [
     <div class="flex items-center gap-3">
       <a
         href="#rsvp"
-        class="hidden rounded-full border border-teal/30 px-4 py-1.5 text-sm tracking-wide text-teal transition-colors hover:border-teal hover:bg-teal hover:text-cream sm:inline-block"
+        class="hidden border border-teal/40 px-4 py-1.5 text-xs font-medium tracking-[0.2em] uppercase text-teal transition-colors hover:bg-teal hover:text-cream sm:inline-block"
       >
         {t.nav.rsvp}
       </a>
       <a
         href={`${base}${other}/`}
-        class="rounded-full border border-gold/40 px-3 py-1.5 text-xs font-medium tracking-widest text-gold transition-colors hover:bg-gold hover:text-cream"
+        class="border border-teal-deep/40 px-3 py-1.5 text-xs font-medium tracking-widest uppercase text-teal-deep transition-colors hover:bg-teal-deep hover:text-cream"
         aria-label={t.langSwitchTo}
       >
         {other.toUpperCase()}
       </a>
     </div>
   </div>
+  <!-- thin kilim diamond strip under the header -->
+  <div class="h-1 w-full" data-strip style="background:
+    repeating-linear-gradient(90deg,
+      var(--color-teal) 0 10px,
+      transparent 10px 14px,
+      var(--color-olive-deep) 14px 24px,
+      transparent 24px 28px);
+    opacity:0.65;"></div>
 </header>
 
 <script>
@@ -68,17 +76,9 @@ const nav = [
   const onScroll = () => {
     if (!header) return;
     if (window.scrollY > 40) {
-      header.classList.add(
-        "bg-cream/85",
-        "backdrop-blur",
-        "shadow-[0_1px_0_rgba(28,74,79,0.12)]",
-      );
+      header.classList.add("shadow-[0_4px_22px_-12px_rgba(74,40,20,0.4)]");
     } else {
-      header.classList.remove(
-        "bg-cream/85",
-        "backdrop-blur",
-        "shadow-[0_1px_0_rgba(28,74,79,0.12)]",
-      );
+      header.classList.remove("shadow-[0_4px_22px_-12px_rgba(74,40,20,0.4)]");
     }
   };
   onScroll();
