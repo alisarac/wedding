@@ -1,7 +1,7 @@
 ---
 import { type Lang, getDict, site } from "@/i18n/content";
-import Monogram from "@/components/motifs/Monogram.astro";
-import Tunduk from "@/components/motifs/Tunduk.astro";
+import KilimBand from "@/components/motifs/KilimBand.astro";
+import Tulip from "@/components/motifs/Tulip.astro";
 
 interface Props {
   lang: Lang;
@@ -9,45 +9,57 @@ interface Props {
 const { lang } = Astro.props;
 const t = getDict(lang);
 const [first, second] = (lang === "tr" ? site.names.latin : site.names.cyrillic).split(" & ");
+const conj = lang === "tr" ? "ve" : "и";
 ---
 
-<section class="kilim-field relative flex min-h-dvh items-center justify-center overflow-hidden px-5">
+<section class="relative flex min-h-dvh items-center justify-center overflow-hidden bg-cream px-5">
+  <!-- vertical kilim bands flanking the hero -->
+  <div class="band band--left pointer-events-none absolute inset-y-0 left-0 z-0">
+    <KilimBand />
+  </div>
+  <div class="band band--right pointer-events-none absolute inset-y-0 right-0 z-0">
+    <KilimBand />
+  </div>
+
   <!-- soft glow -->
   <div
-    class="pointer-events-none absolute inset-0 -z-10"
-    style="background: radial-gradient(60% 50% at 50% 38%, rgba(255,253,248,0.9), rgba(247,240,227,0) 70%);"
+    class="pointer-events-none absolute inset-0 z-0"
+    style="background: radial-gradient(60% 50% at 50% 38%, rgba(255,248,228,0.85), rgba(247,236,204,0) 70%);"
   >
   </div>
-  <!-- giant tunduk watermark -->
-  <Tunduk
-    class="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[120vmin] w-[120vmin] -translate-x-1/2 -translate-y-1/2 text-teal/[0.045]"
-  />
 
-  <div class="flex flex-col items-center text-center">
-    <Monogram class="reveal h-24 w-24 sm:h-28 sm:w-28" style="animation-delay:0.05s" />
+  <div class="relative z-10 flex w-full max-w-2xl flex-col items-center text-center">
+    <p class="reveal eyebrow mt-2" style="animation-delay:0.1s">{t.hero.eyebrow}</p>
 
-    <p class="reveal eyebrow mt-7" style="animation-delay:0.2s">{t.hero.eyebrow}</p>
-
-    <h1 class="reveal mt-4 leading-[0.95] text-teal-deep" style="animation-delay:0.32s">
-      <span class="block text-[clamp(3rem,13vw,7.5rem)]">{first}</span>
-      <span class="my-1 block font-display text-[clamp(1.4rem,4vw,2.4rem)] font-normal text-gold italic">
-        &amp;
+    <h1
+      class="reveal mt-6 leading-[0.92] text-ink"
+      style="animation-delay:0.28s"
+    >
+      <span class="block text-[clamp(2.6rem,11vw,6rem)] tracking-[0.18em] pl-[0.18em]">{first}</span>
+      <span class="my-1 block script text-[clamp(2rem,6vw,3.4rem)] font-normal text-teal">
+        {conj}
       </span>
-      <span class="block text-[clamp(3rem,13vw,7.5rem)]">{second}</span>
+      <span class="block text-[clamp(2.6rem,11vw,6rem)] tracking-[0.18em] pl-[0.18em]">{second}</span>
     </h1>
 
+    <!-- tulip ornament -->
+    <div class="reveal mt-6 flex items-center gap-3 text-teal-deep" style="animation-delay:0.42s">
+      <span class="h-px w-12 sm:w-20 bg-teal-deep/50"></span>
+      <Tulip class="h-8 w-8" />
+      <span class="h-px w-12 sm:w-20 bg-teal-deep/50"></span>
+    </div>
+
     <div
-      class="reveal mt-9 flex flex-col items-center gap-2 text-ink-soft"
-      style="animation-delay:0.5s"
+      class="reveal mt-6 flex flex-col items-center gap-2 text-ink-soft"
+      style="animation-delay:0.55s"
     >
-      <span class="h-px w-12 bg-gold/50"></span>
-      <p class="font-display text-xl tracking-wide text-teal sm:text-2xl">{t.hero.dateLine}</p>
-      <p class="text-sm tracking-[0.18em] uppercase">{t.hero.venueLine}</p>
+      <p class="font-display text-xl tracking-wide text-ink sm:text-2xl">{t.hero.dateLine}</p>
+      <p class="text-sm tracking-[0.22em] uppercase">{t.hero.venueLine}</p>
     </div>
 
     <a
       href="#rsvp"
-      class="reveal mt-9 inline-flex items-center gap-2 rounded-full bg-teal px-7 py-3 text-sm font-medium tracking-wide text-cream shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-teal-deep"
+      class="reveal mt-8 inline-flex items-center gap-2 bg-teal px-7 py-3 text-sm font-medium tracking-[0.18em] uppercase text-cream shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-teal-deep"
       style="animation-delay:0.68s"
     >
       {t.hero.cta}
@@ -57,7 +69,7 @@ const [first, second] = (lang === "tr" ? site.names.latin : site.names.cyrillic)
   <!-- scroll cue -->
   <a
     href="#story"
-    class="reveal absolute bottom-7 left-1/2 -translate-x-1/2 text-gold/70 transition-colors hover:text-gold"
+    class="reveal absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-teal/70 transition-colors hover:text-teal-deep"
     style="animation-delay:0.9s"
     aria-label="scroll"
   >
@@ -66,3 +78,10 @@ const [first, second] = (lang === "tr" ? site.names.latin : site.names.cyrillic)
     </svg>
   </a>
 </section>
+
+<style>
+  .band { width: 9%; line-height: 0; }
+  .band > :global(svg) { width: 100%; height: 100%; display: block; }
+  @media (min-width: 640px) { .band { width: 11%; } }
+  @media (min-width: 1024px) { .band { width: 12%; } }
+</style>

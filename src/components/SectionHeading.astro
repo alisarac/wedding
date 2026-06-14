@@ -1,5 +1,5 @@
 ---
-import HornDivider from "./motifs/HornDivider.astro";
+import Tulip from "./motifs/Tulip.astro";
 
 interface Props {
   eyebrow: string;
@@ -9,18 +9,23 @@ interface Props {
 }
 const { eyebrow, title, align = "center", tone = "ink" } = Astro.props;
 const isCenter = align === "center";
+const ruleColor = tone === "cream" ? "bg-cream/40" : "bg-teal-deep/35";
 ---
 
 <div class={`on-scroll ${isCenter ? "text-center" : "text-left"}`}>
-  <p class="eyebrow">{eyebrow}</p>
+  <p class={`eyebrow ${tone === "cream" ? "text-cream/80" : ""}`}>{eyebrow}</p>
   <h2
-    class={`mt-3 text-4xl sm:text-5xl ${tone === "cream" ? "text-cream" : "text-teal-deep"}`}
+    class={`mt-3 text-4xl font-display sm:text-5xl ${tone === "cream" ? "text-cream" : "text-teal-deep"}`}
   >
     {title}
   </h2>
   {
     isCenter && (
-      <HornDivider class="mx-auto mt-5 h-5 w-44 text-gold/70" />
+      <div class="mt-5 flex items-center justify-center gap-3">
+        <span class={`h-px w-16 sm:w-24 ${ruleColor}`} />
+        <Tulip class="h-7 w-7" />
+        <span class={`h-px w-16 sm:w-24 ${ruleColor}`} />
+      </div>
     )
   }
 </div>
