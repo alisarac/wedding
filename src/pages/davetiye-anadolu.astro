@@ -4,7 +4,6 @@ import KilimBand from "@/components/motifs/KilimBand.astro";
 import KilimBorder from "@/components/motifs/KilimBorder.astro";
 import Tulip from "@/components/motifs/Tulip.astro";
 import OliveBranch from "@/components/motifs/OliveBranch.astro";
-import Landscape from "@/components/motifs/Landscape.astro";
 
 const title = "Ulya & Ali · Düğün Davetiyesi";
 const description =
@@ -123,9 +122,6 @@ const description =
           </p>
         </div>
 
-        <!-- coastal landscape silhouette between branches -->
-        <span class="landscape" aria-hidden="true"><Landscape /></span>
-
         <!-- bottom corner branches -->
         <span class="branch branch--left" aria-hidden="true"><OliveBranch /></span>
         <span class="branch branch--right" aria-hidden="true"><OliveBranch flip /></span>
@@ -208,29 +204,27 @@ const description =
 
     .intro {
       font-family: var(--serif);
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      font-size: 0.95rem;
-      color: var(--ink);
-      line-height: 1.55;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      font-size: 0.82rem;
+      color: var(--brown);
+      line-height: 1.6;
       margin: 0;
     }
 
     .subintro {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 500;
-      font-size: 1.05rem;
+      font-family: var(--script);
+      font-size: 1.5rem;
       color: var(--terra-deep);
-      line-height: 1.5;
-      margin: 0.5rem 0 0.7rem;
+      line-height: 1.2;
+      margin: 0.4rem 0 0.6rem;
     }
 
     .orn { display: block; line-height: 0; }
     .orn svg { width: 110px; height: auto; display: block; margin: 0 auto; }
     .orn--tulip { position: relative; display: flex; align-items: center; justify-content: center; }
-    .orn--tulip svg:first-child { width: 280px; }
-    .orn--tulip :global(.orn__tulip) { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 52px; height: auto; }
+    .orn--tulip svg:first-child { width: 250px; }
+    .orn--tulip :global(.orn__tulip) { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 36px; height: auto; }
 
     .names {
       font-family: var(--serif);
@@ -244,17 +238,16 @@ const description =
       margin: 0.3rem 0 0.4rem;
     }
     .names__row {
-      font-size: 3.1rem;
-      font-weight: 500;
-      letter-spacing: 0.28em;
-      padding-left: 0.28em;
+      font-size: 3rem;
+      letter-spacing: 0.32em;
+      padding-left: 0.32em;
     }
     .names__amp {
       font-family: var(--script);
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: var(--terra);
       line-height: 1;
-      margin: -0.1em 0;
+      margin: -0.05em 0;
       letter-spacing: 0;
       padding-left: 0;
     }
@@ -270,94 +263,76 @@ const description =
     }
     .info__col { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
     .info__sep { width: 1px; align-self: stretch; background: color-mix(in srgb, var(--terra-deep) 25%, transparent); margin: 0.4rem 0; }
-    .info__icon { width: 24px; height: 24px; color: var(--olive-deep); }
+    .info__icon { width: 22px; height: 22px; color: var(--olive-deep); }
     .info__big {
       font-family: var(--serif);
-      font-weight: 600;
-      font-size: 1.6rem;
+      font-weight: 500;
+      font-size: 1.5rem;
       color: var(--ink);
       margin: 0.1rem 0 0;
       line-height: 1;
     }
     .info__small {
       font-family: var(--serif);
-      font-weight: 500;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      color: var(--ink);
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      color: var(--brown);
       margin: 0;
-      line-height: 1.45;
+      line-height: 1.4;
     }
     .info__venue {
       font-family: var(--serif);
-      font-weight: 700;
-      font-size: 0.92rem;
-      letter-spacing: 0.08em;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
       color: var(--ink);
       margin: 0.1rem 0 0;
       line-height: 1.2;
     }
     .info__addr {
       font-family: var(--serif);
-      font-weight: 500;
-      font-size: 0.82rem;
-      color: var(--ink);
+      font-size: 0.68rem;
+      color: var(--brown);
       line-height: 1.45;
-      margin: 0.25rem 0 0;
+      margin: 0.2rem 0 0;
     }
 
     .note {
       font-family: var(--serif);
       font-style: italic;
-      font-weight: 500;
-      font-size: 1.02rem;
-      color: var(--ink);
+      font-size: 0.92rem;
+      color: var(--brown);
       line-height: 1.5;
       margin: 0.3rem 0 0;
     }
     .note__emph {
       font-family: var(--serif);
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      font-size: 0.98rem;
-      color: var(--terra-deep);
-      margin: 0.25rem 0 0;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      font-size: 0.84rem;
+      color: var(--ink);
+      margin: 0.2rem 0 0;
     }
     .seats {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: var(--brown);
-      margin: 0.55rem 0 0;
+      font-family: var(--script);
+      font-size: 1.5rem;
+      color: var(--terra-deep);
+      margin: 0.5rem 0 0;
       line-height: 1;
     }
 
     /* bottom corner branches */
     .branch {
       position: absolute;
-      bottom: 3.4rem;
-      width: 32%;
+      bottom: 3.6rem;
+      width: 22%;
       pointer-events: none;
-      z-index: 2;
-      line-height: 0;
-    }
-    .branch--left { left: 11%; }
-    .branch--right { right: 11%; }
-    .branch :global(svg) { width: 100%; height: auto; display: block; }
-
-    /* coastal landscape (chapel + waves + palms + pergola) */
-    .landscape {
-      position: absolute;
-      left: 13%;
-      right: 13%;
-      bottom: 3.8rem;
-      line-height: 0;
       z-index: 1;
-      pointer-events: none;
-      opacity: 0.92;
+      line-height: 0;
     }
-    .landscape :global(svg) { width: 100%; height: auto; display: block; }
+    .branch--left { left: 12%; }
+    .branch--right { right: 12%; }
+    .branch :global(svg) { width: 100%; height: auto; display: block; }
 
     /* bottom kilim border */
     .border {
@@ -373,18 +348,14 @@ const description =
     .closing {
       position: absolute;
       left: 50%;
-      bottom: 0.5rem;
+      bottom: 0.4rem;
       transform: translateX(-50%);
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 600;
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
+      font-family: var(--script);
+      font-size: 1.3rem;
       color: var(--terra-deep);
       margin: 0;
       line-height: 1;
       z-index: 4;
-      white-space: nowrap;
     }
 
     .hint { font-family: var(--serif); font-size: 0.88rem; letter-spacing: 0.04em; color: #6e5a3f; }
