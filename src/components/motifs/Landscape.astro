@@ -1,0 +1,112 @@
+---
+/**
+ * Stylized coastal landscape silhouette — a hill with a small chapel,
+ * a calm sea with ripples, palm trees and a small wedding pergola.
+ * Sits between the olive branches at the bottom of the davetiye.
+ * Drawn flat in warm earth silhouettes.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+
+const C = {
+  hill: "#8a7b5b",
+  hillDeep: "#6e5d3c",
+  chapel: "#fbf4d9",
+  chapelShade: "#c8b58a",
+  cross: "#5a3a25",
+  wave: "#7d8556",
+  waveDeep: "#5a6240",
+  palm: "#5a6240",
+  palmStem: "#4d3520",
+  pergola: "#6e4d2a",
+  pergolaPost: "#4d2f1f",
+};
+---
+
+<svg
+  class={className}
+  viewBox="0 0 600 110"
+  fill="none"
+  aria-hidden="true"
+>
+  <!-- back wave line -->
+  <path d="M0 70 C 60 64 120 74 200 68 C 280 62 360 72 460 66 C 520 62 580 68 600 66"
+        stroke={C.wave} stroke-width="1.2" fill="none" opacity="0.55" />
+  <!-- mid wave line -->
+  <path d="M0 78 C 80 72 160 82 260 76 C 360 70 460 80 600 74"
+        stroke={C.wave} stroke-width="1.2" fill="none" opacity="0.7" />
+
+  <!-- left hill -->
+  <path d="M0 110 L0 86 C 18 78 38 70 60 64 C 80 58 100 60 120 66 C 145 74 165 82 200 88 L210 110 Z"
+        fill={C.hill} />
+  <path d="M0 110 L0 90 C 18 84 36 78 56 76 C 78 74 100 78 120 84 L130 110 Z"
+        fill={C.hillDeep} opacity="0.7" />
+
+  <!-- chapel on the hill -->
+  <g transform="translate(82 50)">
+    <!-- body -->
+    <rect x="0" y="6" width="20" height="20" fill={C.chapel} />
+    <rect x="0" y="6" width="20" height="2" fill={C.chapelShade} />
+    <!-- door -->
+    <rect x="8" y="16" width="4" height="10" fill={C.chapelShade} />
+    <!-- roof / dome triangle -->
+    <path d="M-2 6 L10 -3 L22 6 Z" fill={C.hillDeep} />
+    <!-- spire -->
+    <rect x="9" y="-12" width="2" height="9" fill={C.cross} />
+    <path d="M10 -16 L7 -12 L13 -12 Z" fill={C.cross} />
+    <!-- cross -->
+    <rect x="9.4" y="-20" width="1.2" height="4" fill={C.cross} />
+    <rect x="8" y="-19" width="4" height="1.2" fill={C.cross} />
+  </g>
+
+  <!-- foreground wave ripples (closer / darker) -->
+  <path d="M180 92 C 220 88 260 94 320 90 C 380 86 440 92 520 88 C 560 86 590 90 600 88"
+        stroke={C.waveDeep} stroke-width="1.4" fill="none" opacity="0.7" />
+  <path d="M120 100 C 200 96 280 102 380 98 C 480 94 560 100 600 98"
+        stroke={C.waveDeep} stroke-width="1.4" fill="none" opacity="0.8" />
+
+  <!-- right palm 1 -->
+  <g transform="translate(430 110)">
+    <path d="M0 0 L-2 -42 L0 -44 L2 -42 Z" fill={C.palmStem} />
+    <!-- fronds: 7 thin leaf shapes radiating -->
+    <g transform="translate(0 -44)" fill={C.palm}>
+      <path d="M0 0 C -10 -2 -22 -2 -32 4 C -22 4 -10 4 0 0 Z" />
+      <path d="M0 0 C 10 -2 22 -2 32 4 C 22 4 10 4 0 0 Z" />
+      <path d="M0 0 C -8 -8 -18 -14 -28 -14 C -20 -8 -10 -4 0 0 Z" />
+      <path d="M0 0 C 8 -8 18 -14 28 -14 C 20 -8 10 -4 0 0 Z" />
+      <path d="M0 0 C -4 -10 -8 -18 -12 -22 C -8 -16 -4 -8 0 0 Z" />
+      <path d="M0 0 C 4 -10 8 -18 12 -22 C 8 -16 4 -8 0 0 Z" />
+      <path d="M0 0 C 0 -8 0 -16 0 -20 C 0 -14 0 -8 0 0 Z" />
+    </g>
+  </g>
+
+  <!-- pergola in the middle-right -->
+  <g transform="translate(490 110)" fill={C.pergola} stroke={C.pergolaPost} stroke-width="0.8">
+    <!-- two posts -->
+    <rect x="0" y="-44" width="2.4" height="44" />
+    <rect x="36" y="-44" width="2.4" height="44" />
+    <!-- top arch -->
+    <path d="M-3 -44 C -3 -60 41 -60 41 -44 L38 -44 C 38 -52 0 -52 0 -44 Z" />
+    <!-- back curtain hint -->
+    <path d="M3 -42 C 8 -34 28 -34 35 -42 L35 -10 C 28 -16 8 -16 3 -10 Z"
+          fill={C.pergola} fill-opacity="0.45" stroke="none" />
+  </g>
+
+  <!-- right palm 2 (taller) -->
+  <g transform="translate(548 110)">
+    <path d="M0 0 L-2 -56 L0 -58 L2 -56 Z" fill={C.palmStem} />
+    <g transform="translate(0 -58)" fill={C.palm}>
+      <path d="M0 0 C -12 -2 -26 -2 -38 4 C -26 4 -12 4 0 0 Z" />
+      <path d="M0 0 C 12 -2 26 -2 38 4 C 26 4 12 4 0 0 Z" />
+      <path d="M0 0 C -10 -10 -22 -16 -34 -16 C -24 -10 -12 -4 0 0 Z" />
+      <path d="M0 0 C 10 -10 22 -16 34 -16 C 24 -10 12 -4 0 0 Z" />
+      <path d="M0 0 C -4 -14 -8 -22 -12 -26 C -8 -18 -4 -10 0 0 Z" />
+      <path d="M0 0 C 4 -14 8 -22 12 -26 C 8 -18 4 -10 0 0 Z" />
+    </g>
+  </g>
+
+  <!-- ground line under landscape -->
+  <line x1="0" y1="110" x2="600" y2="110" stroke={C.hillDeep} stroke-width="0.8" opacity="0.5" />
+</svg>

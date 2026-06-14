@@ -1,67 +1,107 @@
 ---
 /**
- * Olive branch — a curved stem with paired olive-shaped leaves.
- * Used in the bottom corners of the davetiye. Inherits currentColor.
+ * Lush olive branch — a long curving stem arching up from the bottom
+ * corner with many paired leaves and a few olive fruits, drawn as
+ * filled shapes in warm sage/olive/brown. Mirrors via `flip`.
  */
 interface Props {
   class?: string;
-  /** flip horizontally for the right corner */
   flip?: boolean;
 }
 const { class: className = "", flip = false } = Astro.props;
 
-// Leaves placed along the curving stem.
-const leaves = [
-  { t: 0.08, side: 1, sc: 1.0 },
-  { t: 0.18, side: -1, sc: 1.05 },
-  { t: 0.28, side: 1, sc: 1.1 },
-  { t: 0.38, side: -1, sc: 1.05 },
-  { t: 0.48, side: 1, sc: 1.0 },
-  { t: 0.58, side: -1, sc: 0.95 },
-  { t: 0.68, side: 1, sc: 0.9 },
-  { t: 0.78, side: -1, sc: 0.85 },
-  { t: 0.88, side: 1, sc: 0.78 },
-];
+const C = {
+  stem: "#5d6240",
+  leaf: "#8a9266",
+  leafDeep: "#5d6240",
+  leafLight: "#a8b083",
+  olive: "#6e4d2a",
+  oliveAlt: "#8a4d2b",
+};
 
-// Sample points on the stem path M10 180 C 40 140 60 80 100 20
+// Bezier stem (single C-curve) goes from bottom-left corner up to top-right.
+// Sample evenly to place leaves & olives along it.
+const stem = { p0: { x: 14, y: 220 }, p1: { x: 50, y: 200 }, p2: { x: 110, y: 130 }, p3: { x: 170, y: 30 } };
+
 function pointAt(t: number) {
-  const x0 = 10, y0 = 180, x1 = 40, y1 = 140, x2 = 60, y2 = 80, x3 = 100, y3 = 20;
+  const { p0, p1, p2, p3 } = stem;
   const mt = 1 - t;
-  const x = mt ** 3 * x0 + 3 * mt ** 2 * t * x1 + 3 * mt * t ** 2 * x2 + t ** 3 * x3;
-  const y = mt ** 3 * y0 + 3 * mt ** 2 * t * y1 + 3 * mt * t ** 2 * y2 + t ** 3 * y3;
-  // tangent direction
-  const tx = 3 * (mt ** 2 * (x1 - x0) + 2 * mt * t * (x2 - x1) + t ** 2 * (x3 - x2));
-  const ty = 3 * (mt ** 2 * (y1 - y0) + 2 * mt * t * (y2 - y1) + t ** 2 * (y3 - y2));
+  const x = mt ** 3 * p0.x + 3 * mt ** 2 * t * p1.x + 3 * mt * t ** 2 * p2.x + t ** 3 * p3.x;
+  const y = mt ** 3 * p0.y + 3 * mt ** 2 * t * p1.y + 3 * mt * t ** 2 * p2.y + t ** 3 * p3.y;
+  const tx = 3 * (mt ** 2 * (p1.x - p0.x) + 2 * mt * t * (p2.x - p1.x) + t ** 2 * (p3.x - p2.x));
+  const ty = 3 * (mt ** 2 * (p1.y - p0.y) + 2 * mt * t * (p2.y - p1.y) + t ** 2 * (p3.y - p2.y));
   const ang = (Math.atan2(ty, tx) * 180) / Math.PI;
   return { x, y, ang };
 }
 
-const C = { stem: "#5d6240", leaf: "#7a8254", leafDeep: "#5d6240", olive: "#8a4d2b" };
+// Many leaves in pairs alternating along the stem.
+const leafSlots = [
+  0.04, 0.1, 0.16, 0.22, 0.28, 0.34, 0.4, 0.46, 0.52, 0.58, 0.64, 0.7, 0.76, 0.82, 0.88, 0.94,
+];
+
+type Leaf = { x: number; y: number; r: number; sc: number; tone: string };
+const leaves: Leaf[] = [];
+leafSlots.forEach((t, i) => {
+  const p = pointAt(t);
+  const sc = 1 - 0.35 * t;
+  const tones = [C.leaf, C.leafLight, C.leafDeep];
+  // pair: one leaf out-left, one out-right (relative to stem direction)
+  leaves.push({ x: p.x, y: p.y, r: p.ang + 85, sc, tone: tones[i % 3] });
+  leaves.push({ x: p.x, y: p.y, r: p.ang - 85, sc: sc * 0.95, tone: tones[(i + 1) % 3] });
+  // a third leaf forward for fullness
+  if (i % 2 === 0) {
+    leaves.push({ x: p.x, y: p.y, r: p.ang + 55, sc: sc * 0.85, tone: C.leafDeep });
+  }
+});
+
+// A few olives nestled in the foliage.
+const olives = [
+  { t: 0.22, side: 1, c: C.olive },
+  { t: 0.32, side: -1, c: C.oliveAlt },
+  { t: 0.46, side: 1, c: C.olive },
+  { t: 0.58, side: -1, c: C.olive },
+  { t: 0.74, side: 1, c: C.oliveAlt },
+].map((o) => {
+  const p = pointAt(o.t);
+  return { x: p.x + o.side * 5, y: p.y - 3, c: o.c };
+});
 ---
 
 <svg
   class={className}
-  viewBox="0 0 140 200"
+  viewBox="0 0 200 240"
   fill="none"
   aria-hidden="true"
   style={flip ? "transform: scaleX(-1);" : ""}
 >
-  <!-- stem -->
-  <path d="M10 180 C 40 140 60 80 100 20" stroke={C.stem} stroke-width="1.4" stroke-linecap="round" fill="none" />
-  {
-    leaves.map((l) => {
-      const p = pointAt(l.t);
-      const r = p.ang + (l.side > 0 ? 70 : -70);
-      return (
-        <g transform={`translate(${p.x} ${p.y}) rotate(${r}) scale(${l.sc})`}>
-          <path d="M0 0 C 4 -4 9 -10 12 -22 C 8 -20 3 -12 0 0 Z" fill={C.leaf} />
-          <path d="M0 0 C 5 -4 9 -10 12 -22" stroke={C.leafDeep} stroke-width="0.5" stroke-opacity="0.6" fill="none" />
-        </g>
-      );
-    })
-  }
-  <!-- a couple of olives -->
-  <circle cx="48" cy="124" r="3.2" fill={C.olive} />
-  <circle cx="56" cy="110" r="2.8" fill={C.olive} />
-  <circle cx="74" cy="74" r="2.6" fill={C.olive} />
+  <!-- soft stem shadow -->
+  <path
+    d={`M${stem.p0.x} ${stem.p0.y} C ${stem.p1.x} ${stem.p1.y}, ${stem.p2.x} ${stem.p2.y}, ${stem.p3.x} ${stem.p3.y}`}
+    stroke={C.stem}
+    stroke-width="2.4"
+    stroke-linecap="round"
+    fill="none"
+    opacity="0.95"
+  />
+  {/* small twigs branching off */}
+  {[0.32, 0.55, 0.72].map((t) => {
+    const p = pointAt(t);
+    return (
+      <g transform={`translate(${p.x} ${p.y}) rotate(${p.ang - 30})`}>
+        <path d="M0 0 q -10 -8 -16 -18" stroke={C.stem} stroke-width="1.2" stroke-linecap="round" fill="none" />
+      </g>
+    );
+  })}
+  {leaves.map((l) => (
+    <g transform={`translate(${l.x} ${l.y}) rotate(${l.r}) scale(${l.sc})`}>
+      <path d="M0 0 C 4 -3 8 -10 10 -22 C 6 -20 2 -12 0 0 Z" fill={l.tone} />
+      <path d="M1 -1 C 4 -5 7 -12 9 -20" stroke={C.leafDeep} stroke-width="0.5" stroke-opacity="0.55" fill="none" />
+    </g>
+  ))}
+  {olives.map((o) => (
+    <g>
+      <ellipse cx={o.x} cy={o.y} rx="3.2" ry="4.2" fill={o.c} />
+      <ellipse cx={o.x - 0.7} cy={o.y - 1.2} rx="1.1" ry="1.4" fill={C.leafLight} fill-opacity="0.55" />
+    </g>
+  ))}
 </svg>
