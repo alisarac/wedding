@@ -1,0 +1,64 @@
+---
+/**
+ * Horizontal Anatolian kilim border — row of hooked diamonds with a
+ * central tulip motif, in warm earth tones. Stretches via parent CSS.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+
+const C = {
+  cream: "#f0dcb0",
+  terra: "#b5613b",
+  terraDeep: "#8a4d2b",
+  olive: "#7a8254",
+  oliveDeep: "#5d6240",
+  brown: "#5a3a25",
+  rust: "#a04525",
+};
+---
+
+<svg
+  class={className}
+  viewBox="0 0 600 56"
+  preserveAspectRatio="xMidYMid meet"
+  aria-hidden="true"
+>
+  <!-- top + bottom thin rules -->
+  <line x1="0" y1="2" x2="600" y2="2" stroke={C.brown} stroke-width="1.2" />
+  <line x1="0" y1="54" x2="600" y2="54" stroke={C.brown} stroke-width="1.2" />
+
+  <!-- left + right small-diamond columns -->
+  {
+    [12, 28, 44].map((cy) =>
+      [0, 580].map((xOff) => (
+        <path d={`M${xOff + 6} ${cy} L${xOff + 12} ${cy + 6} L${xOff + 6} ${cy + 12} L${xOff} ${cy + 6} Z`} fill={C.terra} />
+      ))
+    )
+  }
+
+  <!-- diamond row centered, flanking the center tulip -->
+  {
+    [70, 130, 190, 250, 350, 410, 470, 530].map((cx, i) => (
+      <g transform={`translate(${cx} 28)`}>
+        <path d="M0 -16 L18 0 L0 16 L-18 0 Z" fill={i % 2 ? C.oliveDeep : C.terra} />
+        <path d="M0 -10 L12 0 L0 10 L-12 0 Z" fill={C.cream} />
+        <path d="M0 -5 L6 0 L0 5 L-6 0 Z" fill={i % 2 ? C.terra : C.oliveDeep} />
+      </g>
+    ))
+  }
+
+  <!-- center tulip motif -->
+  <g transform="translate(300 28)">
+    <!-- stem -->
+    <line x1="0" y1="-2" x2="0" y2="14" stroke={C.oliveDeep} stroke-width="1.4" />
+    <!-- leaves -->
+    <path d="M0 6 C -8 4 -12 -2 -10 -6 C -4 -4 0 0 0 6 Z" fill={C.olive} />
+    <path d="M0 6 C 8 4 12 -2 10 -6 C 4 -4 0 0 0 6 Z" fill={C.olive} />
+    <!-- bulb -->
+    <path d="M0 -4 C -8 -6 -10 -14 -5 -18 C -2 -16 -2 -12 0 -10 C 2 -12 2 -16 5 -18 C 10 -14 8 -6 0 -4 Z" fill={C.terra} />
+    <!-- bulb highlight -->
+    <path d="M0 -8 C -3 -10 -4 -14 -2 -16 C -1 -15 0 -13 0 -10 Z" fill={C.rust} />
+  </g>
+</svg>

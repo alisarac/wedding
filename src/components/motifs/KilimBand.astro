@@ -1,0 +1,105 @@
+---
+/**
+ * Vertical Anatolian kilim band — stacked hooked-diamond medallions,
+ * zigzag bands and small diamond edges in warm earth tones.
+ * Slices vertically (preserveAspectRatio="xMidYMid slice") so it
+ * crops to whatever height it's placed into.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+
+// One "block" of stacked motifs. Repeat-y via parent CSS or by stretching.
+// Colors map to project palette CSS vars but inlined for SVG simplicity.
+const C = {
+  cream: "#f0dcb0",
+  creamLight: "#f6e8c5",
+  terra: "#b5613b",
+  terraDeep: "#8a4d2b",
+  olive: "#7a8254",
+  oliveDeep: "#5d6240",
+  brown: "#5a3a25",
+  rust: "#a04525",
+};
+---
+
+<svg
+  class={className}
+  viewBox="0 0 90 600"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+>
+  <!-- ground -->
+  <rect width="90" height="600" fill={C.cream} />
+
+  <!-- repeating block group; we draw 3 stacked blocks of ~200 each = 600 -->
+  {
+    [0, 200, 400].map((yOff) => (
+      <g transform={`translate(0 ${yOff})`}>
+        {/* outer thin border lines */}
+        <rect x="0" y="0" width="90" height="3" fill={C.brown} />
+        <rect x="0" y="197" width="90" height="3" fill={C.brown} />
+
+        {/* small-diamond edge bands (left & right vertical stripes) */}
+        {[6, 14, 22, 30, 38, 46, 54, 62, 70, 78, 86, 94, 102, 110, 118, 126, 134, 142, 150, 158, 166, 174, 182, 190].map((cy, i) => (
+          <g>
+            <path d={`M3 ${cy} L7 ${cy + 4} L3 ${cy + 8} L-1 ${cy + 4} Z`} fill={i % 2 ? C.terra : C.oliveDeep} />
+            <path d={`M87 ${cy} L91 ${cy + 4} L87 ${cy + 8} L83 ${cy + 4} Z`} fill={i % 2 ? C.oliveDeep : C.terra} />
+          </g>
+        ))}
+
+        {/* zigzag top */}
+        <path
+          d="M10 8 L20 18 L30 8 L40 18 L50 8 L60 18 L70 8 L80 18 L80 22 L10 22 Z"
+          fill={C.terra}
+        />
+
+        {/* MEDALLION 1 — big hooked diamond */}
+        <g transform="translate(0 28)">
+          {/* big diamond outer */}
+          <path d="M45 4 L80 40 L45 76 L10 40 Z" fill={C.terra} />
+          {/* hooks at 4 cardinal points */}
+          <path d="M45 4 L52 -3 L52 4 L60 4 L60 -2 L52 -10 L38 -10 L30 -2 L30 4 L38 4 L38 -3 Z" fill={C.terra} />
+          <path d="M80 40 L87 33 L80 33 L80 25 L86 25 L94 33 L94 47 L86 47 L80 47 L80 47 L87 47 Z" fill={C.terra} />
+          <path d="M45 76 L52 83 L52 76 L60 76 L60 82 L52 90 L38 90 L30 82 L30 76 L38 76 L38 83 Z" fill={C.terra} />
+          <path d="M10 40 L3 47 L10 47 L10 47 L4 47 L-4 47 L-4 33 L4 33 L10 33 L10 33 L3 33 Z" fill={C.terra} />
+          {/* inner diamond cream */}
+          <path d="M45 16 L68 40 L45 64 L22 40 Z" fill={C.cream} />
+          {/* inner diamond rust */}
+          <path d="M45 24 L60 40 L45 56 L30 40 Z" fill={C.rust} />
+          {/* core */}
+          <path d="M45 32 L53 40 L45 48 L37 40 Z" fill={C.cream} />
+          <path d="M45 36 L49 40 L45 44 L41 40 Z" fill={C.brown} />
+        </g>
+
+        {/* horizontal band */}
+        <rect x="6" y="108" width="78" height="6" fill={C.oliveDeep} />
+        {/* small diamond row */}
+        {[12, 24, 36, 48, 60, 72].map((cx) => (
+          <path d={`M${cx} 116 L${cx + 6} 122 L${cx} 128 L${cx - 6} 122 Z`} fill={C.terra} />
+        ))}
+        <rect x="6" y="130" width="78" height="3" fill={C.oliveDeep} />
+
+        {/* MEDALLION 2 — smaller stepped diamond */}
+        <g transform="translate(0 138)">
+          {/* stepped diamond */}
+          <path
+            d="M45 0 L55 6 L55 14 L65 18 L65 26 L55 30 L55 38 L45 44 L35 38 L35 30 L25 26 L25 18 L35 14 L35 6 Z"
+            fill={C.oliveDeep}
+          />
+          <path
+            d="M45 10 L50 14 L50 20 L45 24 L40 20 L40 14 Z"
+            fill={C.cream}
+          />
+        </g>
+
+        {/* zigzag bottom */}
+        <path
+          d="M10 184 L20 174 L30 184 L40 174 L50 184 L60 174 L70 184 L80 174 L80 170 L10 170 Z"
+          fill={C.terra}
+        />
+      </g>
+    ))
+  }
+</svg>

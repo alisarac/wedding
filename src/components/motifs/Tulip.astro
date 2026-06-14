@@ -1,0 +1,36 @@
+---
+/**
+ * Turkish folk tulip (lale) — a stylized three-petal tulip on a stem
+ * with two leaves. Used as a small ornament between dividers.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+
+const C = {
+  cream: "#f0dcb0",
+  terra: "#b5613b",
+  terraDeep: "#8a4d2b",
+  olive: "#7a8254",
+  rust: "#a04525",
+};
+---
+
+<svg
+  class={className}
+  viewBox="0 0 60 60"
+  fill="none"
+  aria-hidden="true"
+>
+  <!-- stem -->
+  <line x1="30" y1="30" x2="30" y2="50" stroke={C.olive} stroke-width="1.6" stroke-linecap="round" />
+  <!-- leaves -->
+  <path d="M30 40 C 16 36 10 26 14 18 C 22 22 30 30 30 40 Z" fill={C.olive} />
+  <path d="M30 40 C 44 36 50 26 46 18 C 38 22 30 30 30 40 Z" fill={C.olive} />
+  <!-- tulip bulb: three petals -->
+  <path d="M30 32 C 14 30 8 16 16 8 C 22 12 24 18 26 22 C 27 18 28 14 30 12 C 32 14 33 18 34 22 C 36 18 38 12 44 8 C 52 16 46 30 30 32 Z" fill={C.terra} />
+  <!-- inner shadow / depth -->
+  <path d="M30 30 C 22 28 18 20 22 14 C 24 18 26 22 30 26 Z" fill={C.terraDeep} fill-opacity="0.55" />
+  <path d="M30 30 C 38 28 42 20 38 14 C 36 18 34 22 30 26 Z" fill={C.rust} fill-opacity="0.45" />
+</svg>
